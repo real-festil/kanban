@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,OAAO,CAAC;EACN,KAAK,EAAE,IAAI;EACX,UAAU,EAAE,kBAAkB;EAC9B,gBAAgB,EAAE,OAAO;EACzB,UAAU,EAAE,IAAI;EAChB,UAAU,EAAE,IAAI;EAChB,aAAa,EAAE,GAAG;CACnB",
+    "sources": [
+        "column.module.scss"
+    ],
+    "names": [],
+    "file": "column.module.css"
+}

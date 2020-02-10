@@ -1,0 +1,13 @@
+.Card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+  background-color: white;
+  border-radius: 5px;
+  margin-bottom: 20px;
+}
+
+.Card p {
+  margin: 5px 0;
+}

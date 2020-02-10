@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,KAAK,CAAC;EACJ,OAAO,EAAE,IAAI;EACb,eAAe,EAAE,aAAa;EAC9B,WAAW,EAAE,MAAM;EACnB,OAAO,EAAE,MAAM;EACf,gBAAgB,EAAE,KAAK;EACvB,aAAa,EAAE,GAAG;EAClB,aAAa,EAAE,IAAI;CACpB;;AAED,AAAA,KAAK,CAAC,CAAC,CAAC;EACN,MAAM,EAAE,KAAK;CACd",
+    "sources": [
+        "card.module.scss"
+    ],
+    "names": [],
+    "file": "card.module.css"
+}

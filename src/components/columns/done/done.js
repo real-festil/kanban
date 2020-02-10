@@ -1,10 +1,10 @@
 import React from 'react';
 import Column from '../column';
 
-const todo = ( props ) => {
+const done = ( props ) => {
   return (
-    <Column colName='ToDo'/>
+    <Column colName='Done'/>
   )
 }
 
-export default todo;
+export default done
