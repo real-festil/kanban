@@ -25,7 +25,7 @@ const layout = props => {
           <Testing />
         </Col>
         <Col xs={3} sm={3} md={3}>
-          <Done/>
+          <Done />
         </Col>
       </Row>
     </Container>
