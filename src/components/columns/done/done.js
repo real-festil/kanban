@@ -1,10 +1,8 @@
-import React from 'react';
-import Column from '../column';
+import React from "react";
+import Column from "../column";
 
-const done = ( props ) => {
-  return (
-    <Column colName='Done'/>
-  )
-}
+const done = props => {
+  return <Column colName="Done" />;
+};
 
-export default done
+export default done;

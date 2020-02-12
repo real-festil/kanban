@@ -5,7 +5,9 @@ import classes from "./card.module.css";
 class Card extends Component {
   state = {
     isModalShowed: false,
-    cardDesc: "Добавьте описание"
+    commentsCount: 0,
+    cardDesc: "Добавьте описание",
+    username: ""
   };
 
   componentDidMount() {
@@ -16,8 +18,10 @@ class Card extends Component {
             " " +
             this.props.cardName +
             " " +
-            this.props.index
-        ) || "Добавьте описание"
+            this.props.index +
+            " desc"
+        ) || "Добавьте описание",
+      username: localStorage.getItem("username")
     });
   }
 
@@ -27,19 +31,22 @@ class Card extends Component {
   };
 
   onDescSaved = textarea => {
-    this.setState({ cardDesc: textarea });
-    setTimeout(
-      () =>
-        localStorage.setItem(
-          this.props.colName +
-            " " +
-            this.props.cardName +
-            " " +
-            this.props.index,
-          this.state.cardDesc
-        ),
-      0
-    );
+    if (textarea !== "") {
+      this.setState({ cardDesc: textarea });
+      setTimeout(
+        () =>
+          localStorage.setItem(
+            this.props.colName +
+              " " +
+              this.props.cardName +
+              " " +
+              this.props.index +
+              " desc",
+            this.state.cardDesc
+          ),
+        0
+      );
+    } else this.setState({ cardDesc: "Добавьте описание" });
   };
 
   onDescUndo = () => {
@@ -50,7 +57,8 @@ class Card extends Component {
             " " +
             this.props.cardName +
             " " +
-            this.props.index
+            this.props.index +
+            " desc"
         ) || "Добавьте описание"
     });
   };
@@ -64,16 +72,28 @@ class Card extends Component {
           type="button"
         >
           <p>{this.props.cardName}</p>
-          <p>{this.props.comments}</p>
+          <div style={{ display: "flex", width: "15%" }}>
+            <img
+              style={{ width: "50%", marginRight: "5px" }}
+              src="https://image.flaticon.com/icons/svg/1946/1946412.svg"
+              alt=""
+            />
+            <p>{this.state.commentsCount}</p>
+          </div>
         </div>
         <Modal
           onDescSaved={textarea => this.onDescSaved(textarea)}
+          commentsCount={commentsCount =>
+            this.setState({ commentsCount: commentsCount })
+          }
           cardNameValue={this.props.cardNameValue}
           focused={this.props.focused}
           blurred={this.props.blurred}
+          username={this.state.username}
           onDelete={this.props.onDelete}
           onDescUndo={this.onDescUndo}
           cardDesc={this.state.cardDesc}
+          index={this.props.index}
           clicked={this.changeDesc}
           show={this.state.isModalShowed}
           onHide={this.onModalShowed}

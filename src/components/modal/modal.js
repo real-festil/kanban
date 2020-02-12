@@ -1,13 +1,46 @@
 import React, { Component } from "react";
 import { Modal, Button } from "react-bootstrap";
+import Comment from "../card/comment/comment";
 import classes from "./modal.module.css";
 
 class ModalComponent extends Component {
   state = {
     isNameInputFocused: false,
     isDescFocused: false,
-    textarea: ""
+    isCommentChanged: false,
+    textarea: "",
+    commentText: "",
+    commentsCount: 0,
+    comments: []
   };
+
+  componentDidMount() {
+    this.setState({
+      commentsCount:
+        JSON.parse(
+          localStorage.getItem(
+            this.props.colName +
+              " " +
+              this.props.cardName +
+              " " +
+              this.props.index +
+              " commentsCount"
+          )
+        ) + 1 || 0,
+      comments:
+        JSON.parse(
+          localStorage.getItem(
+            this.props.colName +
+              " " +
+              this.props.cardName +
+              " " +
+              this.props.index +
+              " comments"
+          )
+        ) || []
+    });
+    setTimeout(() => this.props.commentsCount(this.state.comments.length), 0);
+  }
 
   nameInput = React.createRef();
 
@@ -43,6 +76,89 @@ class ModalComponent extends Component {
     const onDescUndo = () => {
       this.setState({ isDescFocused: false });
       this.props.onDescUndo();
+    };
+
+    const onCommentChanged = e => {
+      if (e.target.value !== "") {
+        this.setState({ isCommentChanged: true, commentText: e.target.value });
+      } else this.setState({ isCommentChanged: false });
+    };
+
+    const onCommentSaved = () => {
+      let commentsCount = this.state.commentsCount + 1;
+      let comments = this.state.comments;
+      comments.unshift({
+        index: commentsCount,
+        commentText: this.state.commentText,
+        commentAuthor: this.props.username
+      });
+      this.setState({
+        comments: comments,
+        commentsCount: commentsCount,
+        isCommentChanged: false,
+        commentText: ""
+      });
+      localStorage.setItem(
+        this.props.colName +
+          " " +
+          this.props.cardName +
+          " " +
+          this.props.index +
+          " comments",
+        JSON.stringify(this.state.comments)
+      );
+      localStorage.setItem(
+        this.props.colName +
+          " " +
+          this.props.cardName +
+          " " +
+          this.props.index +
+          " commentsCount",
+        this.state.commentsCount
+      );
+      setTimeout(() => this.props.commentsCount(this.state.comments.length), 0);
+    };
+
+    const onCommentDelete = key => {
+      let comments = this.state.comments;
+      comments = comments.filter(comment => comment.index !== key);
+      this.setState({ comments: comments });
+      console.log(this.state.comments);
+      setTimeout(
+        () =>
+          localStorage.setItem(
+            this.props.colName +
+              " " +
+              this.props.cardName +
+              " " +
+              this.props.index +
+              " comments",
+            JSON.stringify(this.state.comments)
+          ),
+        0
+      );
+      setTimeout(() => this.props.commentsCount(this.state.comments.length), 0);
+    };
+
+    const onCommentTextChanged = (key, commentText) => {
+      let comments = this.state.comments;
+      comments[
+        comments.findIndex(obj => obj.index === key)
+      ].commentText = commentText;
+      this.setState({ comments: comments });
+      setTimeout(
+        () =>
+          localStorage.setItem(
+            this.props.colName +
+              " " +
+              this.props.cardName +
+              " " +
+              this.props.index +
+              " comments",
+            JSON.stringify(this.state.comments)
+          ),
+        0
+      );
     };
 
     return (
@@ -104,7 +220,6 @@ class ModalComponent extends Component {
             }}
           >
             <textarea
-              autoFocus
               onChange={textAreaChange}
               defaultValue={this.props.cardDesc}
               style={{
@@ -119,6 +234,41 @@ class ModalComponent extends Component {
             <Button className="btn btn-secondary" onClick={onDescUndo}>
               Отменить
             </Button>
+          </div>
+        </Modal.Body>
+        <Modal.Body>
+          <b>Комментарии</b>
+          <div
+            className={classes.AddComment}
+            style={{ height: this.state.isCommentChanged ? "150px" : "50px" }}
+          >
+            <textarea
+              placeholder="Напишите комментарий..."
+              value={this.state.commentText}
+              onChange={onCommentChanged}
+            />
+            <Button
+              className="btn btn-success"
+              onClick={onCommentSaved}
+              style={{
+                display: this.state.isCommentChanged ? "block" : "none"
+              }}
+            >
+              Сохранить
+            </Button>
+          </div>
+          <div className={classes.Comment}>
+            {this.state.comments.map(comment => (
+              <Comment
+                key={comment.index}
+                onCommentTextChanged={commentText =>
+                  onCommentTextChanged(comment.index, commentText)
+                }
+                commentText={comment.commentText}
+                onCommentDelete={() => onCommentDelete(comment.index)}
+                username={comment.commentAuthor}
+              />
+            ))}
           </div>
         </Modal.Body>
         <Modal.Footer>

@@ -5,6 +5,7 @@ import Card from "../card/card";
 
 class Column extends Component {
   state = {
+    username: "",
     colName: this.props.colName,
     cardName: "",
     isHeadingInputFocused: false,
@@ -21,6 +22,7 @@ class Column extends Component {
 
   componentDidMount() {
     this.setState({
+      username: localStorage.getItem("username"),
       colName: localStorage.getItem(this.props.colName) || this.props.colName,
       cards:
         JSON.parse(localStorage.getItem(this.props.colName + " Cards")) || [],
@@ -29,7 +31,6 @@ class Column extends Component {
       )
     });
     setTimeout(() => (this.cards = this.state.cards), 0);
-    console.log(this.state.cardsCount);
   }
 
   inputChangeHandler = (e, ref) => {
@@ -226,6 +227,7 @@ class Column extends Component {
                   <div key={index}>
                     <Card
                       index={card.index}
+                      username={this.state.username}
                       cardNameValue={card.name}
                       focused={() => this.cardNameInputFocused(card.index)}
                       blurred={() => this.cardNameInputBlurred(card.index)}
