@@ -1,10 +1,7 @@
 import React, { Component } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import classes from "./layout.module.css";
-import ToDo from "../columns/ToDo/todo";
-import InProgress from "../columns/inProgress/inProgress";
-import Testing from "../columns/testing/testing";
-import Done from "../columns/done/done";
+import Column from "../columns/column";
 import Login from "../login/login";
 
 class Layout extends Component {
@@ -38,16 +35,16 @@ class Layout extends Component {
           </Row>
           <Row>
             <Col xs={6} sm={3} md={3}>
-              <ToDo />
+              <Column colName="ToDo" />
             </Col>
             <Col xs={6} sm={3} md={3}>
-              <InProgress />
+              <Column colName="InProgress" />
             </Col>
             <Col xs={6} sm={3} md={3}>
-              <Testing />
+              <Column colName="Testing" />
             </Col>
             <Col xs={6} sm={3} md={3}>
-              <Done />
+              <Column colName="Done" />
             </Col>
           </Row>
         </Container>

@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,QAAQ,CAAC,EAAE,CAAC;EACV,KAAK,EAAE,IAAI;EACX,UAAU,EAAE,GAAG;EACf,aAAa,EAAE,UACjB;CAAC;;AAED,AAAA,QAAQ,CAAC,KAAK,CAAA;EACZ,WAAW,EAAE,IAAI;EACjB,KAAK,EAAE,GAAG;EACV,MAAM,EAAE,iBAAiB;EACzB,SAAS,EAAE,OAAO;EAClB,WAAW,EAAE,GAAG;EAChB,OAAO,EAAE,KAAK;EACd,aAAa,EAAE,GAAG;EAClB,WAAW,EAAE,GAAG;CACjB",
+    "sources": [
+        "caption.module.scss"
+    ],
+    "names": [],
+    "file": "caption.module.css"
+}

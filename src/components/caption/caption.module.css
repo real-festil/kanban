@@ -1,0 +1,17 @@
+.Caption h5 {
+  width: 100%;
+  margin-top: 2px;
+  overflow-wrap: break-word;
+}
+
+.Caption input {
+  margin-left: -1px;
+  width: 90%;
+  border: 1px solid #0079bf;
+  font-size: 1.25rem;
+  font-weight: 500;
+  padding: 1px 0;
+  margin-bottom: 6px;
+  line-height: 1.2;
+}
+/*# sourceMappingURL=caption.module.css.map */

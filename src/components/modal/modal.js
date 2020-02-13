@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Modal, Button } from "react-bootstrap";
-import Comment from "../card/comment/comment";
+import Comment from "../comment/comment";
+import Caption from "../caption/caption";
 import classes from "./modal.module.css";
 
 class ModalComponent extends Component {
@@ -48,11 +49,6 @@ class ModalComponent extends Component {
     const onDelete = () => {
       this.props.onDelete();
       this.props.onHide();
-    };
-
-    const changeCardName = () => {
-      this.setState({ isNameInputFocused: true });
-      this.nameInput.current.focus();
     };
 
     const onBlurred = () => {
@@ -171,34 +167,9 @@ class ModalComponent extends Component {
       >
         <Modal.Header closeButton>
           <Modal.Title id="contained-modal-title-vcenter">
-            <p
-              style={{
-                display: this.state.isNameInputFocused ? "none" : "block",
-                cursor: "pointer"
-              }}
-              onClick={changeCardName}
-            >
-              {this.props.cardName}
-            </p>
-            <input
-              onChange={this.props.cardNameChanged}
-              value={this.props.cardNameValue}
-              ref={this.nameInput}
-              onFocus={this.props.focused}
-              onBlur={onBlurred}
-              style={{
-                position: this.state.isNameInputFocused ? "static" : "absolute",
-                top: "3%",
-                marginLeft: "-1px",
-                width: "90%",
-                border: "1px solid #0079bf",
-                fontSize: "24px",
-                fontWeight: "500",
-                padding: "1px 0",
-                marginBottom: "18px",
-                lineHeight: "1.2",
-                zIndex: this.state.isNameInputFocused ? "1" : "-1"
-              }}
+            <Caption
+              captionName={this.props.cardName}
+              changeInputName={value => this.props.changeCardName(value)}
             />
             <p className={classes.SubHeading}>в колонке {this.props.colName}</p>
           </Modal.Title>
