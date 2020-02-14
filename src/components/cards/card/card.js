@@ -29,38 +29,7 @@ class Card extends Component {
     this.setState({ isModalShowed: !this.state.isModalShowed });
   };
 
-  onDescSaved = textarea => {
-    if (textarea !== "") {
-      this.setState({ cardDesc: textarea });
-      setTimeout(
-        () =>
-          localStorage.setItem(
-            this.props.colName +
-              " " +
-              this.props.cardName +
-              " " +
-              this.props.index +
-              " desc",
-            this.state.cardDesc
-          ),
-        0
-      );
-    } else this.setState({ cardDesc: "Добавьте описание" });
-  };
 
-  onDescUndo = () => {
-    this.setState({
-      cardDesc:
-        localStorage.getItem(
-          this.props.colName +
-            " " +
-            this.props.cardName +
-            " " +
-            this.props.index +
-            " desc"
-        ) || "Добавьте описание"
-    });
-  };
 
   render() {
     return (
@@ -81,7 +50,10 @@ class Card extends Component {
           </div>
         </div>
         <Modal
-          onDescSaved={textarea => this.onDescSaved(textarea)}
+          cardDesc={this.props.cardDesc}
+          onDescSaved={this.props.onDescSaved}
+          onDescUndo={this.props.onDescUndo}
+          textAreaChange={e => this.props.textAreaChange(e)}
           commentsCount={commentsCount =>
             this.setState({ commentsCount: commentsCount })
           }
@@ -90,8 +62,6 @@ class Card extends Component {
           blurred={this.props.blurred}
           username={this.state.username}
           onDelete={this.props.onDelete}
-          onDescUndo={this.onDescUndo}
-          cardDesc={this.state.cardDesc}
           index={this.props.index}
           clicked={this.changeDesc}
           show={this.state.isModalShowed}

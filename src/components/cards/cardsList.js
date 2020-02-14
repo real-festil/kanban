@@ -21,6 +21,10 @@ class CardsList extends Component {
               changeCardName={value =>
                 this.props.changeCardName(value, card.index)
               }
+              cardDesc={this.props.cardDesc}
+              onDescSaved={this.props.onDescSaved}
+              onDescUndo={this.props.onDescUndo}
+              textAreaChange={e => this.props.textAreaChange(e)}
             />
           </div>
         ))}

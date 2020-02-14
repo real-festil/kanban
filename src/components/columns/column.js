@@ -10,7 +10,16 @@ class Column extends Component {
     colName: localStorage.getItem(this.props.colName) || this.props.colName,
     cards:
       JSON.parse(localStorage.getItem(this.props.colName + " Cards")) || [],
-    cardsCount: JSON.parse(localStorage.getItem(this.props.colName + " count"))
+    cardsCount: JSON.parse(localStorage.getItem(this.props.colName + " count")),
+    cardDesc:
+      localStorage.getItem(
+        this.props.colName +
+          " " +
+          this.props.cardName +
+          " " +
+          this.props.index +
+          " desc"
+      ) || "Добавьте описание"
   };
 
   changeColumnName = value => {
@@ -76,6 +85,39 @@ class Column extends Component {
     }
   };
 
+  onDescSaved = () => {
+    let { cardDesc } = this.state;
+    if (cardDesc !== "") {
+      localStorage.setItem(
+        this.props.colName +
+          " " +
+          this.props.cardName +
+          " " +
+          this.props.index +
+          " desc",
+        cardDesc
+      );
+    } else this.setState({ cardDesc: "Добавьте описание" });
+  };
+
+  onDescChanged = e => {
+    this.setState({ cardDesc: e.target.value });
+  };
+
+  onDescUndo = () => {
+    this.setState({
+      cardDesc:
+        localStorage.getItem(
+          this.props.colName +
+            " " +
+            this.props.cardName +
+            " " +
+            this.props.index +
+            " desc"
+        ) || "Добавьте описание"
+    });
+  };
+
   render() {
     return (
       <Container className={classes.Column}>
@@ -97,6 +139,10 @@ class Column extends Component {
                   this.changeCardName(value, cardIndex)
                 }
                 onCardAdded={value => this.onCardAdded(value)}
+                cardDesc={this.state.cardDesc}
+                onDescSaved={this.onDescSaved}
+                onDescUndo={this.onDescUndo}
+                textAreaChange={e => this.onDescChanged(e)}
               />
             </Container>
           </Row>

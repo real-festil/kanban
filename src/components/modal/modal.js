@@ -2,14 +2,13 @@ import React, { Component } from "react";
 import { Modal, Button } from "react-bootstrap";
 import Comment from "../comment/comment";
 import Caption from "../caption/caption";
+import Description from "../description/description";
 import classes from "./modal.module.css";
 
 class ModalComponent extends Component {
   state = {
     isNameInputFocused: false,
-    isDescFocused: false,
     isCommentChanged: false,
-    textarea: "",
     commentText: "",
     commentsCount: 0,
     comments: []
@@ -49,29 +48,6 @@ class ModalComponent extends Component {
     const onDelete = () => {
       this.props.onDelete();
       this.props.onHide();
-    };
-
-    const onBlurred = () => {
-      this.setState({ isNameInputFocused: false });
-      this.props.blurred();
-    };
-
-    const onDescFocused = () => {
-      this.setState({ isDescFocused: true });
-    };
-
-    const textAreaChange = e => {
-      this.setState({ textarea: e.target.value });
-    };
-
-    const onDescSaved = () => {
-      this.setState({ isDescFocused: false });
-      this.props.onDescSaved(this.state.textarea);
-    };
-
-    const onDescUndo = () => {
-      this.setState({ isDescFocused: false });
-      this.props.onDescUndo();
     };
 
     const onCommentChanged = e => {
@@ -175,37 +151,12 @@ class ModalComponent extends Component {
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <b>Описание</b>
-          <p
-            onClick={onDescFocused}
-            style={{
-              display: this.state.isDescFocused ? "none" : "block",
-              cursor: "pointer"
-            }}
-          >
-            {this.props.cardDesc}
-          </p>
-          <div
-            style={{
-              display: this.state.isDescFocused ? "block" : "none"
-            }}
-          >
-            <textarea
-              onChange={textAreaChange}
-              defaultValue={this.props.cardDesc}
-              style={{
-                width: "100%",
-                height: "100px",
-                resize: "none"
-              }}
-            />
-            <Button style={{ marginRight: "20px" }} onClick={onDescSaved}>
-              Сохранить
-            </Button>
-            <Button className="btn btn-secondary" onClick={onDescUndo}>
-              Отменить
-            </Button>
-          </div>
+          <Description
+            cardDesc={this.props.cardDesc}
+            onDescSaved={this.props.onDescSaved}
+            onDescUndo={this.props.onDescUndo}
+            textAreaChange={e => this.props.textAreaChange(e)}
+          />
         </Modal.Body>
         <Modal.Body>
           <b>Комментарии</b>
