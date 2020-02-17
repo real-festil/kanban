@@ -3,8 +3,7 @@ import classes from "./caption.module.css";
 
 class Caption extends Component {
   state = {
-    labelValue:
-      localStorage.getItem(this.props.captionName) || this.props.captionName,
+    labelValue: this.labelValue || this.props.captionName,
     isLabelFocused: false
   };
 
@@ -13,9 +12,7 @@ class Caption extends Component {
   };
 
   inputChangeHandler = e => {
-    this.setState({ labelValue: e.target.value }, () =>
-      console.log(this.state.labelValue)
-    );
+    this.setState({ labelValue: e.target.value });
   };
 
   inputBlurHandler = () => {

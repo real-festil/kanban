@@ -1,9 +1,0 @@
-{
-    "version": 3,
-    "mappings": "AAAA,AAAA,KAAK,CAAC;EACJ,KAAK,EAAE,IAAI;EACX,MAAM,EAAE,IAAI;EACZ,gBAAgB,EAAE,OAAO;EACzB,UAAU,EAAE,IAAI;EAChB,aAAa,EAAE,GAAG;CACnB",
-    "sources": [
-        "todo.module.scss"
-    ],
-    "names": [],
-    "file": "todo.module.css"
-}

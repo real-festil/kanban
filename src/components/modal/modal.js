@@ -46,7 +46,7 @@ class ModalComponent extends Component {
 
   render() {
     const onDelete = () => {
-      this.props.onDelete();
+      this.props.onCardDelete();
       this.props.onHide();
     };
 

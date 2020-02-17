@@ -29,8 +29,6 @@ class Card extends Component {
     this.setState({ isModalShowed: !this.state.isModalShowed });
   };
 
-
-
   render() {
     return (
       <>
@@ -61,7 +59,7 @@ class Card extends Component {
           focused={this.props.focused}
           blurred={this.props.blurred}
           username={this.state.username}
-          onDelete={this.props.onDelete}
+          onCardDelete={this.props.onCardDelete}
           index={this.props.index}
           clicked={this.changeDesc}
           show={this.state.isModalShowed}

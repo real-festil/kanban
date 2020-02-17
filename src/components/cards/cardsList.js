@@ -14,12 +14,12 @@ class CardsList extends Component {
               saveInStorage={value => this.saveInStorage(value, card.index)}
               username={username}
               cardNameValue={card.name}
-              onDelete={() => this.onDelete(card.name)}
+              onCardDelete={() => this.props.onCardDelete(card.id)}
               cardName={card.name}
               comments={card.comments}
               colName={colName}
               changeCardName={value =>
-                this.props.changeCardName(value, card.index)
+                this.props.changeCardName(value, card.id)
               }
               cardDesc={this.props.cardDesc}
               onDescSaved={this.props.onDescSaved}
