@@ -49,7 +49,7 @@ class Card extends Component {
         </div>
         <Modal
           cardDesc={this.props.cardDesc}
-          onDescSaved={this.props.onDescSaved}
+          onDescSaved={value => this.props.onDescSaved(value)}
           onDescUndo={this.props.onDescUndo}
           textAreaChange={e => this.props.textAreaChange(e)}
           commentsCount={commentsCount =>
@@ -68,6 +68,8 @@ class Card extends Component {
           colName={this.props.colName}
           changeCardName={value => this.props.changeCardName(value)}
           saveInStorage={value => this.props.saveInStorage(value)}
+          onCommentSaved={value => this.props.onCommentSaved(value)}
+          comments={this.props.comments}
         />
       </>
     );

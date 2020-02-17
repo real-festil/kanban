@@ -3,6 +3,11 @@ import Card from "./card/card";
 import AddCard from "./cardControl/addCard/addCard";
 
 class CardsList extends Component {
+  commentsFilter = (comments, cardId) => {
+    console.log(comments, cardId);
+    this.props.comments(comments);
+  };
+
   render() {
     let { cards, username, colName } = this.props;
     return (
@@ -16,15 +21,18 @@ class CardsList extends Component {
               cardNameValue={card.name}
               onCardDelete={() => this.props.onCardDelete(card.id)}
               cardName={card.name}
-              comments={card.comments}
               colName={colName}
               changeCardName={value =>
                 this.props.changeCardName(value, card.id)
               }
-              cardDesc={this.props.cardDesc}
-              onDescSaved={this.props.onDescSaved}
-              onDescUndo={this.props.onDescUndo}
+              cardDesc={card.cardDesc}
+              onDescSaved={value => this.props.onDescSaved(value, card.id)}
+              onDescUndo={() => this.props.onDescUndo(card.id)}
               textAreaChange={e => this.props.textAreaChange(e)}
+              onCommentSaved={value =>
+                this.props.onCommentSaved(value, card.id)
+              }
+              comments={() => this.props.comments(card.id)}
             />
           </div>
         ))}

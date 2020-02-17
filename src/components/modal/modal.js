@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import { Modal, Button } from "react-bootstrap";
-import Comment from "../comment/comment";
+import CommentItem from "../comment/commentItem/commentItem";
 import Caption from "../caption/caption";
 import Description from "../description/description";
+import CommentForm from "../comment/commentForm/commentForm";
 import classes from "./modal.module.css";
 
 class ModalComponent extends Component {
@@ -153,35 +154,19 @@ class ModalComponent extends Component {
         <Modal.Body>
           <Description
             cardDesc={this.props.cardDesc}
-            onDescSaved={this.props.onDescSaved}
+            onDescSaved={value => this.props.onDescSaved(value)}
             onDescUndo={this.props.onDescUndo}
-            textAreaChange={e => this.props.textAreaChange(e)}
           />
         </Modal.Body>
         <Modal.Body>
-          <b>Комментарии</b>
-          <div
-            className={classes.AddComment}
-            style={{ height: this.state.isCommentChanged ? "150px" : "50px" }}
-          >
-            <textarea
-              placeholder="Напишите комментарий..."
-              value={this.state.commentText}
-              onChange={onCommentChanged}
-            />
-            <Button
-              className="btn btn-success"
-              onClick={onCommentSaved}
-              style={{
-                display: this.state.isCommentChanged ? "block" : "none"
-              }}
-            >
-              Сохранить
-            </Button>
-          </div>
+          <CommentForm
+            onCommentSaved={value => this.props.onCommentSaved(value)}
+          />
           <div className={classes.Comment}>
-            {this.state.comments.map(comment => (
-              <Comment
+            {console.log(
+              this.props.comments
+            ) /* {this.props.comments.map(comment => (
+              <CommentItem
                 key={comment.index}
                 onCommentTextChanged={commentText =>
                   onCommentTextChanged(comment.index, commentText)
@@ -190,7 +175,7 @@ class ModalComponent extends Component {
                 onCommentDelete={() => onCommentDelete(comment.index)}
                 username={comment.commentAuthor}
               />
-            ))}
+            ))} */}
           </div>
         </Modal.Body>
         <Modal.Footer>

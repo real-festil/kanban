@@ -1,0 +1,27 @@
+
+.AddComment {
+  height: 50px;
+  box-shadow: 0px 0px 5px gray;
+  display: flex;
+  overflow: hidden;
+  flex-direction: column;
+  margin: 10px 0;
+  padding: 10px;
+  transition: 0.2s ease-in-out;
+}
+
+.AddComment textarea {
+  height: 100px !important;
+  border: none;
+  height: auto;
+  resize: none;
+}
+
+.AddComment textarea:focus {
+  outline: none;
+}
+
+.AddComment button {
+  margin-top: 20px;
+  width: 150px
+}

@@ -14,7 +14,6 @@ class Layout extends Component {
     ],
     username: "",
     cards: [],
-    cardDesc: [],
     comments: [],
     cardsCount: 1,
     isLoginShow: false
@@ -51,7 +50,13 @@ class Layout extends Component {
         {
           cards: [
             ...cards,
-            { id: cardsCount, colId: id, name: value, comments: 0 }
+            {
+              id: cardsCount,
+              colId: id,
+              name: value,
+              comments: 0,
+              cardDesc: ""
+            }
           ],
           cardsCount: cardsCount + 1
         },
@@ -78,6 +83,55 @@ class Layout extends Component {
       }),
       () => localStorage.setItem("state", JSON.stringify(this.state))
     );
+  };
+
+  onDescSaved = (value, cardId) => {
+    this.setState(
+      prevState => ({
+        cards: prevState.cards.map(card =>
+          card.id === cardId ? { ...card, cardDesc: value } : card
+        )
+      }),
+      () => localStorage.setItem("state", JSON.stringify(this.state))
+    );
+  };
+
+  onDescUndo = cardId => {
+    this.setState(
+      prevState => ({
+        cards: prevState.cards.map(card =>
+          card.id === cardId ? { ...card, cardDesc: this.state.cardDesc } : card
+        )
+      }),
+      () => localStorage.setItem("state", JSON.stringify(this.state))
+    );
+  };
+
+  onCommentSaved = (value, cardId) => {
+    const { comments, cardsCount } = this.state;
+    if (value === "") {
+      alert("Введите заголовок");
+    } else {
+      this.setState(
+        {
+          comments: [
+            ...comments,
+            {
+              cardId: cardId,
+              value: value
+            }
+          ]
+        },
+        () => localStorage.setItem("state", JSON.stringify(this.state))
+      );
+    }
+  };
+
+  filterComments = cardId => {
+    const filteredComments = this.state.comments.filter(
+      comment => cardId === comment.cardId
+    );
+    console.log(filteredComments);
   };
 
   onHide = username => {
@@ -113,6 +167,14 @@ class Layout extends Component {
                       this.changeColumnName(value, column.id)
                     }
                     cards={cards}
+                    onDescSaved={(value, cardId) =>
+                      this.onDescSaved(value, cardId)
+                    }
+                    onDescUndo={cardId => this.onDescUndo(cardId)}
+                    onCommentSaved={(value, cardId) =>
+                      this.onCommentSaved(value, cardId)
+                    }
+                    comments={cardId => this.filterComments(cardId)}
                   />
                 </Col>
               );

@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { Button } from "react-bootstrap";
-import classes from "./comment.module.css";
+import classes from "./commentItem.module.css";
 
-class Comment extends Component {
+class CommentItem extends Component {
   state = {
     isCommentChanging: false,
     commentText: this.props.commentText
@@ -78,4 +78,4 @@ class Comment extends Component {
   }
 }
 
-export default Comment;
+export default CommentItem;

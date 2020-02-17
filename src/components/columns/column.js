@@ -32,27 +32,6 @@ class Column extends Component {
   state =
     JSON.parse(localStorage.getItem(this.props.colName)) || this.initialState;
 
-  componentDidMount() {}
-
-  onDelete = cardName => {
-    let cards = this.state.cards;
-    cards = cards.filter(card => cardName !== card.name);
-    if (cards.length === 0) {
-      this.setState({ cards: [] });
-      localStorage.removeItem(this.state.colName + " Cards");
-    } else {
-      this.setState({ cards: cards });
-      setTimeout(() =>
-        localStorage.setItem(
-          this.state.colName + " Cards",
-          JSON.stringify(this.state.cards),
-          0
-        )
-      );
-    }
-    setTimeout(() => (this.cards = this.state.cards), 0);
-  };
-
   onDescSaved = () => {
     let { cardDesc } = this.state;
     if (cardDesc !== "") {
@@ -101,17 +80,22 @@ class Column extends Component {
               <CardsList
                 colName={this.props.colName}
                 cards={this.props.cards}
-                cardsCount={this.state.cardsCount}
                 username={this.state.username}
                 changeCardName={(value, cardId) =>
                   this.props.changeCardName(value, cardId)
                 }
                 onCardAdded={value => this.props.onCardAdded(value)}
                 onCardDelete={cardId => this.props.onCardDelete(cardId)}
-                cardDesc={this.state.cardDesc}
-                onDescSaved={this.onDescSaved}
-                onDescUndo={this.onDescUndo}
+                cardDesc={this.props.cardDesc}
+                onDescSaved={(value, cardId) =>
+                  this.props.onDescSaved(value, cardId)
+                }
+                onDescUndo={this.props.onDescUndo}
                 textAreaChange={e => this.onDescChanged(e)}
+                onCommentSaved={(value, cardId) =>
+                  this.props.onCommentSaved(value, cardId)
+                }
+                comments={cardId => this.props.comments(cardId)}
               />
             </Container>
           </Row>

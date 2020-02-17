@@ -4,38 +4,49 @@ import classes from "./description.module.css";
 
 class Description extends Component {
   state = {
-    isDescFocused: false
+    isDescFocused: false,
+    description: this.props.cardDesc
   };
 
   onDescFocused = () => {
     this.setState({ isDescFocused: true });
   };
 
-  onDescSaved = () => {
+  onDescSaved = value => {
     this.setState({ isDescFocused: false });
-    this.props.onDescSaved();
+    this.props.onDescSaved(value);
   };
 
   onDescUndo = () => {
-    this.setState({ isDescFocused: false });
-    this.props.onDescUndo();
+    this.setState({ isDescFocused: false, description: this.props.cardDesc });
+  };
+
+  onDescChanged = e => {
+    this.setState({ description: e.target.value });
   };
 
   render() {
-    let { isDescFocused } = this.state;
-    let { cardDesc, textAreaChange } = this.props;
+    let { isDescFocused, description } = this.state;
     return (
       <>
         <b>Описание</b>
-        {isDescFocused ? null : <p onClick={this.onDescFocused}>{cardDesc}</p>}
+        {isDescFocused ? null : (
+          <p onClick={this.onDescFocused}>
+            {description || "Введите описание"}
+          </p>
+        )}
         {isDescFocused ? (
           <div>
             <textarea
-              onChange={e => textAreaChange(e)}
-              defaultValue={cardDesc}
+              autoFocus
+              onChange={e => this.onDescChanged(e)}
+              value={description}
               className={classes.DescriptionTextArea}
             />
-            <Button style={{ marginRight: "20px" }} onClick={this.onDescSaved}>
+            <Button
+              style={{ marginRight: "20px" }}
+              onClick={() => this.onDescSaved(description)}
+            >
               Сохранить
             </Button>
             <Button className="btn btn-secondary" onClick={this.onDescUndo}>
