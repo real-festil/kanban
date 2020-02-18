@@ -12,9 +12,8 @@ class AddCard extends Component {
     this.inputBlurHandler();
   };
 
-  inputBlurHandler = () => {
+  inputBlurHandler = () =>
     this.setState({ cardName: "", isCardInputFocused: false });
-  };
 
   inputKeyHandler = e => {
     if (e.key === "Enter") this.onCardAdded();

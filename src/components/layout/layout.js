@@ -139,8 +139,9 @@ class Layout extends Component {
   };
 
   onHide = username => {
-    this.setState({ username: username, isLoginShow: false });
-    setTimeout(() => localStorage.setItem("username", this.state.username), 0);
+    this.setState({ username: username, isLoginShow: false }, () =>
+      localStorage.setItem("state", JSON.stringify(this.state))
+    );
   };
 
   render() {
