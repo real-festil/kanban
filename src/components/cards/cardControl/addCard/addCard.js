@@ -50,8 +50,7 @@ class AddCard extends Component {
               Отмена
             </button>
           </div>
-        ) : null}
-        {isCardInputFocused ? null : (
+        ) : (
           <div className={classes.ButtonWrapper}>
             <button
               type="button"

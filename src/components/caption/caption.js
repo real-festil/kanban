@@ -16,10 +16,12 @@ class Caption extends Component {
   };
 
   inputBlurHandler = () => {
-    let { labelValue } = this.state;
-    let { captionName } = this.props;
+    const { labelValue } = this.state;
+    const { captionName } = this.props;
+
     this.setState({ isLabelFocused: false });
     if (!labelValue) this.setState({ labelValue: captionName });
+
     this.props.changeInputName(labelValue ? labelValue : captionName);
   };
 
@@ -31,14 +33,10 @@ class Caption extends Component {
   };
 
   render() {
-    let { isLabelFocused, labelValue } = this.state;
+    const { isLabelFocused, labelValue } = this.state;
+
     return (
       <div className={classes.Caption}>
-        {!isLabelFocused ? (
-          <h5 md={4} onClick={this.inputFocusHandler}>
-            {labelValue}
-          </h5>
-        ) : null}
         {isLabelFocused ? (
           <input
             autoFocus
@@ -47,7 +45,11 @@ class Caption extends Component {
             onKeyUp={this.inputKeyHandler}
             value={labelValue}
           />
-        ) : null}
+        ) : (
+          <h5 md={4} onClick={this.inputFocusHandler}>
+            {labelValue}
+          </h5>
+        )}
       </div>
     );
   }
