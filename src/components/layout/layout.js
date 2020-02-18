@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import classes from "./layout.module.css";
-import Column from "../columns/column";
+import Column from "../column/column";
 import Login from "../login/login";
+import { v4 as uuidv4 } from "uuid";
 
 class Layout extends Component {
   initialState = {
@@ -15,7 +16,7 @@ class Layout extends Component {
     username: "",
     cards: [],
     comments: [],
-    cardsCount: 1,
+    uniqueId: uuidv4(),
     isLoginShow: false
   };
 
@@ -40,7 +41,7 @@ class Layout extends Component {
   };
 
   onCardAdded = (value, id) => {
-    const { cards, cardsCount } = this.state;
+    const { cards, uniqueId } = this.state;
 
     if (value === "") {
       alert("Введите заголовок");
@@ -50,14 +51,14 @@ class Layout extends Component {
           cards: [
             ...cards,
             {
-              id: cardsCount,
+              id: uniqueId,
               colId: id,
               name: value,
               comments: 0,
               cardDesc: ""
             }
           ],
-          cardsCount: cardsCount + 1
+          uniqueId: uuidv4()
         },
         () => localStorage.setItem("state", JSON.stringify(this.state))
       );
@@ -96,20 +97,20 @@ class Layout extends Component {
   };
 
   onCommentSaved = (value, cardId) => {
-    const { comments, cardsCount, username } = this.state;
+    const { comments, uniqueId, username } = this.state;
 
     this.setState(
       {
         comments: [
           ...comments,
           {
-            id: cardsCount,
+            id: uniqueId,
             cardId: cardId,
             value: value,
             username: username
           }
         ],
-        cardsCount: cardsCount + 1
+        uniqueId: uuidv4()
       },
       () => localStorage.setItem("state", JSON.stringify(this.state))
     );
