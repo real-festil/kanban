@@ -9,6 +9,7 @@ class Card extends Component {
 
   onModalShowed = () => {
     this.setState({ isModalShowed: !this.state.isModalShowed });
+    console.log(this.props.comments.length);
   };
 
   render() {
@@ -35,14 +36,15 @@ class Card extends Component {
           onClick={this.onModalShowed}
           type="button"
         >
-          <p>{cardName}</p>
-          <div style={{ display: "flex", width: "15%" }}>
+          <div className={classes.CardName}>
+            <p>{cardName}</p>
+          </div>
+          <div className={classes.CardComments}>
             <img
-              style={{ width: "50%", marginRight: "5px" }}
               src="https://image.flaticon.com/icons/svg/1946/1946412.svg"
               alt=""
             />
-            <p>{commentsCount}</p>
+            <p>{comments.length}</p>
           </div>
         </div>
         <Modal

@@ -2,19 +2,46 @@
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  width: 100%;
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  padding: 0 20px;
+  padding: 10px 20px;
   background-color: white;
   border-radius: 5px;
   margin-bottom: 20px;
 }
 
-.Card p {
-  margin: 5px 0;
+.CardName {
+  width: 90%;
+  overflow: hidden;
+}
+
+.CardName p {
+  margin: 0;
+}
+
+.CardComments {
+  -webkit-box-flex: 10%;
+      -ms-flex: 10%;
+          flex: 10%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.CardComments img {
+  width: 10px;
+  margin-right: 5px;
+}
+
+.CardComments p {
+  margin: 0;
 }
 /*# sourceMappingURL=card.module.css.map */
