@@ -1,9 +1,8 @@
 import React from "react";
 import { Modal, Button } from "react-bootstrap";
-import CommentItem from "../comment/commentItem/commentItem";
 import Caption from "../caption/caption";
 import Description from "../description/description";
-import CommentForm from "../comment/commentForm/commentForm";
+import Comment from "../comment/comment";
 import classes from "./modal.module.css";
 
 const modal = props => {
@@ -54,10 +53,12 @@ const modal = props => {
         />
       </Modal.Body>
       <Modal.Body>
-        <CommentForm onCommentSaved={value => onCommentSaved(value)} />
+        <b>Комментарии</b>
+        <Comment onCommentSaved={value => onCommentSaved(value)} />
         <div className={classes.Comment}>
           {comments.map((comment, index) => (
-            <CommentItem
+            <Comment
+              isItem={true}
               key={index}
               onCommentChange={newValue =>
                 onCommentChange(newValue, comment.id)

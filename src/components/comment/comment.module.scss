@@ -1,3 +1,31 @@
+
+.AddComment {
+  height: 50px;
+  box-shadow: 0px 0px 5px gray;
+  display: flex;
+  overflow: hidden;
+  flex-direction: column;
+  margin: 10px 0;
+  padding: 10px;
+  transition: 0.2s ease-in-out;
+}
+
+.AddComment textarea {
+  height: 100px !important;
+  border: none;
+  height: auto;
+  resize: none;
+}
+
+.AddComment textarea:focus {
+  outline: none;
+}
+
+.AddComment button {
+  margin-top: 20px;
+  width: 150px
+}
+
 .Comment b {
   font-size: 16px;
   margin-left: 10px;
@@ -24,12 +52,8 @@
 
 .CommentControl {
   width: 150px;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: space-evenly;
-      -ms-flex-pack: space-evenly;
-          justify-content: space-evenly;
+  justify-content: space-evenly;
   font-size: 12px;
   color: #5e6c84;
   margin: 5px 0 0 5px;
@@ -39,4 +63,3 @@
 .CommentControl p {
   cursor: pointer;
 }
-/*# sourceMappingURL=commentItem.module.css.map */
