@@ -4,32 +4,30 @@ import classes from "./card.module.css";
 
 class Card extends Component {
   state = {
-    isModalShowed: false,
-    commentsCount: 0,
-    cardDesc: "Добавьте описание",
-    username: ""
+    isModalShowed: false
   };
-
-  componentDidMount() {
-    this.setState({
-      cardDesc:
-        localStorage.getItem(
-          this.props.colName +
-            " " +
-            this.props.cardName +
-            " " +
-            this.props.index +
-            " desc"
-        ) || "Добавьте описание",
-      username: localStorage.getItem("username")
-    });
-  }
 
   onModalShowed = () => {
     this.setState({ isModalShowed: !this.state.isModalShowed });
   };
 
   render() {
+    let {
+      colName,
+      changeCardName,
+      onCardDelete,
+      onDescSaved,
+      onDescUndo,
+      onCommentSaved,
+      comments,
+      onCommentChange,
+      onCommentDelete,
+      username,
+      cardName,
+      cardDesc
+    } = this.props;
+
+    let { commentsCount, isModalShowed } = this.state;
     return (
       <>
         <div
@@ -37,39 +35,32 @@ class Card extends Component {
           onClick={this.onModalShowed}
           type="button"
         >
-          <p>{this.props.cardName}</p>
+          <p>{cardName}</p>
           <div style={{ display: "flex", width: "15%" }}>
             <img
               style={{ width: "50%", marginRight: "5px" }}
               src="https://image.flaticon.com/icons/svg/1946/1946412.svg"
               alt=""
             />
-            <p>{this.state.commentsCount}</p>
+            <p>{commentsCount}</p>
           </div>
         </div>
         <Modal
-          cardDesc={this.props.cardDesc}
-          onDescSaved={value => this.props.onDescSaved(value)}
-          onDescUndo={this.props.onDescUndo}
-          textAreaChange={e => this.props.textAreaChange(e)}
-          commentsCount={commentsCount =>
-            this.setState({ commentsCount: commentsCount })
-          }
-          cardNameValue={this.props.cardNameValue}
-          focused={this.props.focused}
-          blurred={this.props.blurred}
-          username={this.state.username}
-          onCardDelete={this.props.onCardDelete}
-          index={this.props.index}
+          cardDesc={cardDesc}
+          onDescSaved={value => onDescSaved(value)}
+          onDescUndo={onDescUndo}
+          onCardDelete={onCardDelete}
           clicked={this.changeDesc}
-          show={this.state.isModalShowed}
+          show={isModalShowed}
           onHide={this.onModalShowed}
-          cardName={this.props.cardName}
-          colName={this.props.colName}
-          changeCardName={value => this.props.changeCardName(value)}
-          saveInStorage={value => this.props.saveInStorage(value)}
-          onCommentSaved={value => this.props.onCommentSaved(value)}
-          comments={this.props.comments}
+          cardName={cardName}
+          colName={colName}
+          changeCardName={value => changeCardName(value)}
+          onCommentSaved={value => onCommentSaved(value)}
+          onCommentChange={(newValue, id) => onCommentChange(newValue, id)}
+          onCommentDelete={id => onCommentDelete(id)}
+          comments={comments}
+          username={username}
         />
       </>
     );

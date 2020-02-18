@@ -22,12 +22,10 @@ class Layout extends Component {
   state = JSON.parse(localStorage.getItem("state")) || this.initialState;
 
   componentDidMount() {
-    if (
-      localStorage.getItem("username") === "" ||
-      !localStorage.getItem("username")
-    ) {
-      this.setState({ isLoginShow: true });
-    }
+    if (!this.state.username)
+      this.setState({ isLoginShow: true }, () =>
+        localStorage.setItem("state", JSON.stringify(this.state))
+      );
   }
 
   changeColumnName = (value, id) => {
@@ -108,30 +106,44 @@ class Layout extends Component {
   };
 
   onCommentSaved = (value, cardId) => {
-    const { comments, cardsCount } = this.state;
-    if (value === "") {
-      alert("Введите заголовок");
-    } else {
-      this.setState(
-        {
-          comments: [
-            ...comments,
-            {
-              cardId: cardId,
-              value: value
-            }
-          ]
-        },
-        () => localStorage.setItem("state", JSON.stringify(this.state))
-      );
-    }
+    const { comments, cardsCount, username } = this.state;
+    this.setState(
+      {
+        comments: [
+          ...comments,
+          {
+            id: cardsCount,
+            cardId: cardId,
+            value: value,
+            username: username
+          }
+        ],
+        cardsCount: cardsCount + 1
+      },
+      () => localStorage.setItem("state", JSON.stringify(this.state))
+    );
   };
 
-  filterComments = cardId => {
-    const filteredComments = this.state.comments.filter(
-      comment => cardId === comment.cardId
+  onCommentChange = (newValue, id) => {
+    this.setState(
+      prevState => ({
+        comments: prevState.comments.map(comment =>
+          comment.id === id
+            ? { ...comment, value: newValue ? newValue : comment.value }
+            : comment
+        )
+      }),
+      () => localStorage.setItem("state", JSON.stringify(this.state))
     );
-    console.log(filteredComments);
+  };
+
+  onCommentDelete = id => {
+    this.setState(
+      prevState => ({
+        comments: prevState.comments.filter(comment => comment.id !== id)
+      }),
+      () => localStorage.setItem("state", JSON.stringify(this.state))
+    );
   };
 
   onHide = username => {
@@ -140,7 +152,7 @@ class Layout extends Component {
   };
 
   render() {
-    const { columnsList } = this.state;
+    const { columnsList, isLoginShow } = this.state;
     return (
       <>
         <Container className={classes.Layout}>
@@ -151,7 +163,8 @@ class Layout extends Component {
           </Row>
           <Row>
             {columnsList.map(column => {
-              const cards = this.state.cards.filter(
+              let { cards, comments, username } = this.state;
+              const filteredCards = cards.filter(
                 card => card.colId === column.id
               );
               return (
@@ -166,7 +179,7 @@ class Layout extends Component {
                     changeColumnName={value =>
                       this.changeColumnName(value, column.id)
                     }
-                    cards={cards}
+                    cards={filteredCards}
                     onDescSaved={(value, cardId) =>
                       this.onDescSaved(value, cardId)
                     }
@@ -174,14 +187,19 @@ class Layout extends Component {
                     onCommentSaved={(value, cardId) =>
                       this.onCommentSaved(value, cardId)
                     }
-                    comments={cardId => this.filterComments(cardId)}
+                    comments={comments}
+                    onCommentChange={(newValue, id) =>
+                      this.onCommentChange(newValue, id)
+                    }
+                    onCommentDelete={id => this.onCommentDelete(id)}
+                    username={username}
                   />
                 </Col>
               );
             })}
           </Row>
         </Container>
-        <Login show={this.state.isLoginShow} onHide={this.onHide} />
+        <Login show={isLoginShow} onHide={this.onHide} />
       </>
     );
   }

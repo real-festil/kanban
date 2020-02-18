@@ -22,14 +22,15 @@ class AddCard extends Component {
   };
 
   render() {
+    let { isCardInputFocused, cardName } = this.state;
     return (
       <>
-        {this.state.isCardInputFocused ? (
+        {isCardInputFocused ? (
           <div className={classes.AddCardControl}>
             <input
               autoFocus
               onChange={e => this.setState({ cardName: e.target.value })}
-              value={this.state.cardName}
+              value={cardName}
               onKeyUp={this.inputKeyHandler}
               placeholder="Введите заголовок"
             />
@@ -49,7 +50,7 @@ class AddCard extends Component {
             </button>
           </div>
         ) : null}
-        {this.state.isCardInputFocused ? null : (
+        {isCardInputFocused ? null : (
           <div className={classes.ButtonWrapper}>
             <button
               type="button"

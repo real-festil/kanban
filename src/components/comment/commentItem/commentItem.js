@@ -8,52 +8,40 @@ class CommentItem extends Component {
     commentText: this.props.commentText
   };
 
-  commentChangeRef = React.createRef();
-
-  onCommentChange = ref => {
-    this.setState({ isCommentChanging: true });
-    setTimeout(() => ref.current.focus(), 0);
-  };
-
-  onCommentTextChange = e => {
-    this.setState({ commentText: e.target.value });
+  onCommentChange = e => {
+    this.setState({ isCommentChanging: true, commentText: e.target.value });
   };
 
   onCommentSaved = () => {
-    if (this.state.commentText !== "") {
-      console.log("1");
-      this.setState({ isCommentChanging: false });
-      setTimeout(
-        () => this.props.onCommentTextChanged(this.state.commentText),
-        0
-      );
-    } else {
-      console.log("2");
-      this.setState({ isCommentChanging: false });
-      setTimeout(
-        () => this.props.onCommentTextChanged(this.props.commentText),
-        0
-      );
-    }
+    setTimeout(
+      () =>
+        this.setState({
+          isCommentChanging: false,
+          commentText: this.props.commentText
+        }),
+      0
+    );
+    this.props.onCommentChange(this.state.commentText);
   };
 
   render() {
+    let { onCommentDelete, username } = this.props;
+    let { isCommentChanging, commentText } = this.state;
+
     return (
       <div className={classes.Comment}>
-        <b>{this.props.username}</b>
+        <b>{username}</b>
         <div className={classes.CommentText}>
-          <p
-            style={{ display: this.state.isCommentChanging ? "none" : "block" }}
-          >
-            {this.state.commentText}
+          <p style={{ display: isCommentChanging ? "none" : "block" }}>
+            {commentText}
           </p>
           <div className={classes.CommentTextChange}>
             <textarea
-              defaultValue={this.state.commentText}
+              defaultValue={commentText}
               ref={this.commentChangeRef}
-              onChange={this.onCommentTextChange}
+              onChange={this.onCommentChange}
               style={{
-                display: this.state.isCommentChanging ? "block" : "none"
+                display: isCommentChanging ? "block" : "none"
               }}
             />
           </div>
@@ -61,17 +49,15 @@ class CommentItem extends Component {
             className="btn btn-success"
             onClick={this.onCommentSaved}
             style={{
-              display: this.state.isCommentChanging ? "block" : "none"
+              display: isCommentChanging ? "block" : "none"
             }}
           >
             Сохранить
           </Button>
         </div>
         <div className={classes.CommentControl}>
-          <p onClick={() => this.onCommentChange(this.commentChangeRef)}>
-            Изменить
-          </p>
-          <p onClick={this.props.onCommentDelete}>Удалить</p>
+          <p onClick={this.onCommentChange}>Изменить</p>
+          <p onClick={onCommentDelete}>Удалить</p>
         </div>
       </div>
     );

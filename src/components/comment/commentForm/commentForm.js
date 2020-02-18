@@ -9,21 +9,6 @@ class CommentForm extends Component {
   };
 
   onCommentSaved = e => {
-    // if (this.state.commentText !== "") {
-    //   console.log("1");
-    //   this.setState({ isCommentChanging: false });
-    //   setTimeout(
-    //     () => this.props.onCommentTextChanged(this.state.commentText),
-    //     0
-    //   );
-    // } else {
-    //   console.log("2");
-    //   this.setState({ isCommentChanging: false });
-    //   setTimeout(
-    //     () => this.props.onCommentTextChanged(this.props.commentText),
-    //     0
-    //   );
-    // }
     this.props.onCommentSaved(this.state.commentText);
     this.setState({ isCommentFocus: false, commentText: "" });
   };
