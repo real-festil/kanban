@@ -5,7 +5,7 @@ import CardsList from "../cards/cardsList";
 import Caption from "../caption/caption";
 
 const column = props => {
-  let {
+  const {
     colName,
     cards,
     changeCardName,
@@ -13,36 +13,32 @@ const column = props => {
     onCardAdded,
     onCardDelete,
     onDescSaved,
-    onDescUndo,
     onCommentSaved,
     comments,
     onCommentChange,
     onCommentDelete,
     username
   } = props;
+
   return (
     <Container className={classes.Column}>
       <Col>
         <Row>
-          <Caption
-            captionName={colName}
-            changeInputName={value => changeColumnName(value)}
-          />
+          <Caption captionName={colName} changeInputName={changeColumnName} />
         </Row>
         <Row>
           <Container>
             <CardsList
               colName={colName}
               cards={cards}
-              changeCardName={(value, cardId) => changeCardName(value, cardId)}
-              onCardAdded={value => onCardAdded(value)}
-              onCardDelete={cardId => onCardDelete(cardId)}
-              onDescSaved={(value, cardId) => onDescSaved(value, cardId)}
-              onDescUndo={onDescUndo}
-              onCommentSaved={(value, cardId) => onCommentSaved(value, cardId)}
+              changeCardName={changeCardName}
+              onCardAdded={onCardAdded}
+              onCardDelete={onCardDelete}
+              onDescSaved={onDescSaved}
+              onCommentSaved={onCommentSaved}
               comments={comments}
-              onCommentChange={(newValue, id) => onCommentChange(newValue, id)}
-              onCommentDelete={id => onCommentDelete(id)}
+              onCommentChange={onCommentChange}
+              onCommentDelete={onCommentDelete}
               username={username}
             />
           </Container>

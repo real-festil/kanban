@@ -8,12 +8,12 @@ import classes from "./modal.module.css";
 
 const modal = props => {
   const onDelete = () => {
-    let { onCardDelete, onHide } = props;
+    const { onCardDelete, onHide } = props;
     onCardDelete();
     onHide();
   };
 
-  let {
+  const {
     colName,
     changeCardName,
     onDescSaved,

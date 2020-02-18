@@ -14,7 +14,8 @@ class CommentForm extends Component {
   };
 
   render() {
-    let { isCommentFocus, commentText } = this.state;
+    const { isCommentFocus, commentText } = this.state;
+
     return (
       <>
         <b>Комментарии</b>
@@ -32,7 +33,7 @@ class CommentForm extends Component {
             value={commentText}
             onChange={e => this.setState({ commentText: e.target.value })}
           />
-          {isCommentFocus ? (
+          {isCommentFocus && (
             <Button
               className="btn btn-success"
               onClick={e => this.onCommentSaved(e)}
@@ -40,7 +41,7 @@ class CommentForm extends Component {
             >
               Сохранить
             </Button>
-          ) : null}
+          )}
         </div>
       </>
     );

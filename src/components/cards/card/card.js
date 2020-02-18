@@ -7,18 +7,15 @@ class Card extends Component {
     isModalShowed: false
   };
 
-  onModalShowed = () => {
+  onModalShowed = () =>
     this.setState({ isModalShowed: !this.state.isModalShowed });
-    console.log(this.props.comments.length);
-  };
 
   render() {
-    let {
+    const {
       colName,
       changeCardName,
       onCardDelete,
       onDescSaved,
-      onDescUndo,
       onCommentSaved,
       comments,
       onCommentChange,
@@ -28,7 +25,8 @@ class Card extends Component {
       cardDesc
     } = this.props;
 
-    let { commentsCount, isModalShowed } = this.state;
+    const { isModalShowed } = this.state;
+
     return (
       <>
         <div
@@ -49,18 +47,17 @@ class Card extends Component {
         </div>
         <Modal
           cardDesc={cardDesc}
-          onDescSaved={value => onDescSaved(value)}
-          onDescUndo={onDescUndo}
+          onDescSaved={onDescSaved}
           onCardDelete={onCardDelete}
           clicked={this.changeDesc}
           show={isModalShowed}
           onHide={this.onModalShowed}
           cardName={cardName}
           colName={colName}
-          changeCardName={value => changeCardName(value)}
-          onCommentSaved={value => onCommentSaved(value)}
-          onCommentChange={(newValue, id) => onCommentChange(newValue, id)}
-          onCommentDelete={id => onCommentDelete(id)}
+          changeCardName={changeCardName}
+          onCommentSaved={onCommentSaved}
+          onCommentChange={onCommentChange}
+          onCommentDelete={onCommentDelete}
           comments={comments}
           username={username}
         />

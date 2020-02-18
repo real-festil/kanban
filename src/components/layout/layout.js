@@ -41,6 +41,7 @@ class Layout extends Component {
 
   onCardAdded = (value, id) => {
     const { cards, cardsCount } = this.state;
+
     if (value === "") {
       alert("Введите заголовок");
     } else {
@@ -94,19 +95,9 @@ class Layout extends Component {
     );
   };
 
-  onDescUndo = cardId => {
-    this.setState(
-      prevState => ({
-        cards: prevState.cards.map(card =>
-          card.id === cardId ? { ...card, cardDesc: this.state.cardDesc } : card
-        )
-      }),
-      () => localStorage.setItem("state", JSON.stringify(this.state))
-    );
-  };
-
   onCommentSaved = (value, cardId) => {
     const { comments, cardsCount, username } = this.state;
+
     this.setState(
       {
         comments: [
@@ -153,6 +144,7 @@ class Layout extends Component {
 
   render() {
     const { columnsList, isLoginShow } = this.state;
+
     return (
       <>
         <Container className={classes.Layout}>
@@ -163,35 +155,27 @@ class Layout extends Component {
           </Row>
           <Row>
             {columnsList.map(column => {
-              let { cards, comments, username } = this.state;
+              const { cards, comments, username } = this.state;
               const filteredCards = cards.filter(
                 card => card.colId === column.id
               );
+
               return (
                 <Col xs={6} sm={3} md={3} key={column.id}>
                   <Column
                     colName={column.name}
                     onCardAdded={value => this.onCardAdded(value, column.id)}
-                    onCardDelete={cardId => this.onCardDelete(cardId)}
-                    changeCardName={(value, cardId) =>
-                      this.changeCardName(value, cardId)
-                    }
+                    onCardDelete={this.onCardDelete}
+                    changeCardName={this.changeCardName}
                     changeColumnName={value =>
                       this.changeColumnName(value, column.id)
                     }
                     cards={filteredCards}
-                    onDescSaved={(value, cardId) =>
-                      this.onDescSaved(value, cardId)
-                    }
-                    onDescUndo={cardId => this.onDescUndo(cardId)}
-                    onCommentSaved={(value, cardId) =>
-                      this.onCommentSaved(value, cardId)
-                    }
+                    onDescSaved={this.onDescSaved}
+                    onCommentSaved={this.onCommentSaved}
                     comments={comments}
-                    onCommentChange={(newValue, id) =>
-                      this.onCommentChange(newValue, id)
-                    }
-                    onCommentDelete={id => this.onCommentDelete(id)}
+                    onCommentChange={this.onCommentChange}
+                    onCommentDelete={this.onCommentDelete}
                     username={username}
                   />
                 </Col>

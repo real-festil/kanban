@@ -26,15 +26,11 @@ class Description extends Component {
   };
 
   render() {
-    let { isDescFocused, description } = this.state;
+    const { isDescFocused, description } = this.state;
+
     return (
       <>
         <b>Описание</b>
-        {isDescFocused ? null : (
-          <p onClick={this.onDescFocused}>
-            {description || "Введите описание"}
-          </p>
-        )}
         {isDescFocused ? (
           <div>
             <textarea
@@ -53,7 +49,11 @@ class Description extends Component {
               Отменить
             </Button>
           </div>
-        ) : null}
+        ) : (
+          <p onClick={this.onDescFocused}>
+            {description || "Введите описание"}
+          </p>
+        )}
       </>
     );
   }

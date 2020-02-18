@@ -13,20 +13,19 @@ class CommentItem extends Component {
   };
 
   onCommentSaved = () => {
-    setTimeout(
-      () =>
-        this.setState({
-          isCommentChanging: false,
-          commentText: this.props.commentText
-        }),
-      0
+    this.setState(
+      {
+        isCommentChanging: false,
+        commentText: this.props.commentText
+      },
+      () => this.props.onCommentChange(this.state.commentText)
     );
-    this.props.onCommentChange(this.state.commentText);
   };
 
   render() {
-    let { onCommentDelete, username } = this.props;
-    let { isCommentChanging, commentText } = this.state;
+    const { onCommentDelete, username } = this.props;
+
+    const { isCommentChanging, commentText } = this.state;
 
     return (
       <div className={classes.Comment}>

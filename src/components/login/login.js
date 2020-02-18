@@ -11,8 +11,9 @@ class Login extends Component {
   };
 
   onLogin = () => {
-    let { username } = this.state;
-    if (username === "") alert("Введите имя пользователя");
+    const { username } = this.state;
+
+    if (!username) alert("Введите имя пользователя");
     else this.props.onHide(username);
   };
 

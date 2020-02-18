@@ -22,7 +22,8 @@ class AddCard extends Component {
   };
 
   render() {
-    let { isCardInputFocused, cardName } = this.state;
+    const { isCardInputFocused, cardName } = this.state;
+
     return (
       <>
         {isCardInputFocused ? (
