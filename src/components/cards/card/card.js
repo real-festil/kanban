@@ -7,7 +7,7 @@ class Card extends Component {
     isModalShowed: false
   };
 
-  onModalShowed = () =>
+  onModalToggle = () =>
     this.setState({ isModalShowed: !this.state.isModalShowed });
 
   render() {
@@ -30,7 +30,7 @@ class Card extends Component {
       <>
         <div
           className={classes.Card}
-          onClick={this.onModalShowed}
+          onClick={this.onModalToggle}
           type="button"
         >
           <div className={classes.CardName}>
@@ -50,7 +50,7 @@ class Card extends Component {
           onCardDelete={onCardDelete}
           clicked={this.changeDesc}
           show={isModalShowed}
-          onHide={this.onModalShowed}
+          onHide={this.onModalToggle}
           cardName={cardName}
           colName={colName}
           changeCardName={changeCardName}

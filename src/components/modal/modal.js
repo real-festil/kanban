@@ -2,12 +2,14 @@ import React from "react";
 import { Modal, Button } from "react-bootstrap";
 import Caption from "../caption/caption";
 import Description from "../description/description";
-import Comment from "../comment/comment";
+import CommentCreateForm from "../comments/commentCreateForm/commentCreateForm";
+import CommentItem from "../comments/commentItem/commentItem";
 import classes from "./modal.module.css";
 
 const modal = props => {
   const onDelete = () => {
     const { onCardDelete, onHide } = props;
+
     onCardDelete();
     onHide();
   };
@@ -38,39 +40,32 @@ const modal = props => {
     >
       <Modal.Header closeButton>
         <Modal.Title id="contained-modal-title-vcenter">
-          <Caption
-            captionName={cardName}
-            changeInputName={value => changeCardName(value)}
-          />
+          <Caption captionName={cardName} changeInputName={changeCardName} />
           <p className={classes.SubHeading}>в колонке {colName}</p>
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <Description
           cardDesc={cardDesc}
-          onDescSaved={value => onDescSaved(value)}
+          onDescSaved={onDescSaved}
           onDescUndo={onDescUndo}
         />
       </Modal.Body>
       <Modal.Body>
-        <b>Комментарии</b>
-        <Comment onCommentSaved={value => onCommentSaved(value)} />
-        <div className={classes.Comment}>
-          {comments.map((comment, index) => {
-            const { id, value } = comment;
+        <CommentCreateForm onCommentSaved={onCommentSaved} />
+        {comments.map((comment, index) => {
+          const { id, value } = comment;
 
-            return (
-              <Comment
-                isItem={true}
-                key={index}
-                onCommentChange={newValue => onCommentChange(newValue, id)}
-                commentText={value}
-                onCommentDelete={() => onCommentDelete(id)}
-                username={username}
-              />
-            );
-          })}
-        </div>
+          return (
+            <CommentItem
+              key={index}
+              onCommentChange={newValue => onCommentChange(newValue, id)}
+              commentText={value}
+              onCommentDelete={() => onCommentDelete(id)}
+              username={username}
+            />
+          );
+        })}
       </Modal.Body>
       <Modal.Footer>
         <Button className="btn btn-danger" onClick={onDelete}>

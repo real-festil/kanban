@@ -3,7 +3,7 @@ import classes from "./caption.module.css";
 
 class Caption extends Component {
   state = {
-    labelValue: this.labelValue || this.props.captionName,
+    labelValue: this.props.captionName,
     isLabelShowed: false
   };
 

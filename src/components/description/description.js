@@ -9,8 +9,7 @@ class Description extends Component {
   };
 
   onDescSaved = value => {
-    this.setState({ isOpened: false });
-    this.props.onDescSaved(value);
+    this.setState({ isOpened: false }, () => this.props.onDescSaved(value));
   };
 
   render() {

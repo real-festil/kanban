@@ -81,7 +81,6 @@ class Layout extends Component {
       }),
       () => localStorage.setItem("state", JSON.stringify(this.state))
     );
-    console.log(this.state);
   };
 
   onCommentSaved = (value, cardId) => {
@@ -93,9 +92,9 @@ class Layout extends Component {
           ...comments,
           {
             id: uuidv4(),
-            cardId: cardId,
-            value: value,
-            username: username
+            cardId,
+            value,
+            username
           }
         ]
       },
