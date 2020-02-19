@@ -20,7 +20,7 @@ const cardsList = props => {
   return (
     <>
       {cards.map((card, index) => {
-        const { name, id, desc } = card;
+        const { name, id, cardDesc } = card;
 
         return (
           <div key={index}>
@@ -31,7 +31,7 @@ const cardsList = props => {
               cardName={name}
               colName={colName}
               changeCardName={value => changeCardName(value, id)}
-              cardDesc={desc}
+              cardDesc={cardDesc}
               onDescSaved={value => onDescSaved(value, id)}
               onCommentSaved={value => onCommentSaved(value, id)}
               comments={comments.filter(comment => comment.cardId === id)}

@@ -74,26 +74,17 @@ class Layout extends Component {
     );
   };
 
-  changeCardName = (value, cardId) => {
+  changeCardData = (data, cardId) => {
+    console.log(data);
     this.setState(
       prevState => ({
         cards: prevState.cards.map(card =>
-          card.id === cardId ? { ...card, name: value } : card
+          card.id === cardId ? { ...card, ...data } : card
         )
       }),
       () => localStorage.setItem("state", JSON.stringify(this.state))
     );
-  };
-
-  onDescSaved = (value, cardId) => {
-    this.setState(
-      prevState => ({
-        cards: prevState.cards.map(card =>
-          card.id === cardId ? { ...card, cardDesc: value } : card
-        )
-      }),
-      () => localStorage.setItem("state", JSON.stringify(this.state))
-    );
+    console.log(this.state);
   };
 
   onCommentSaved = (value, cardId) => {
@@ -168,12 +159,16 @@ class Layout extends Component {
                     colName={column.name}
                     onCardAdded={value => this.onCardAdded(value, column.id)}
                     onCardDelete={this.onCardDelete}
-                    changeCardName={this.changeCardName}
+                    changeCardName={(value, cardId) =>
+                      this.changeCardData({ name: value }, cardId)
+                    }
                     changeColumnName={value =>
                       this.changeColumnName(value, column.id)
                     }
                     cards={filteredCards}
-                    onDescSaved={this.onDescSaved}
+                    onDescSaved={(value, cardId) =>
+                      this.changeCardData({ cardDesc: value }, cardId)
+                    }
                     onCommentSaved={this.onCommentSaved}
                     comments={comments}
                     onCommentChange={this.onCommentChange}
