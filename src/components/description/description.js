@@ -8,21 +8,9 @@ class Description extends Component {
     description: this.props.cardDesc
   };
 
-  onDescOpened = () => {
-    this.setState({ isOpened: true });
-  };
-
   onDescSaved = value => {
     this.setState({ isOpened: false });
     this.props.onDescSaved(value);
-  };
-
-  onDescUndo = () => {
-    this.setState({ isOpened: false, description: this.props.cardDesc });
-  };
-
-  onDescChanged = e => {
-    this.setState({ description: e.target.value });
   };
 
   render() {
@@ -35,7 +23,7 @@ class Description extends Component {
           <div>
             <textarea
               autoFocus
-              onChange={e => this.onDescChanged(e)}
+              onChange={e => this.setState({ description: e.target.value })}
               value={description}
               className={classes.DescriptionTextArea}
             />
@@ -45,12 +33,22 @@ class Description extends Component {
             >
               Сохранить
             </Button>
-            <Button className="btn btn-secondary" onClick={this.onDescUndo}>
+            <Button
+              className="btn btn-secondary"
+              onClick={() =>
+                this.setState({
+                  isOpened: false,
+                  description: this.props.cardDesc
+                })
+              }
+            >
               Отменить
             </Button>
           </div>
         ) : (
-          <p onClick={this.onDescOpened}>{description || "Введите описание"}</p>
+          <p onClick={() => this.setState({ isOpened: true })}>
+            {description || "Введите описание"}
+          </p>
         )}
       </>
     );
