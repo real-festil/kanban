@@ -24,7 +24,6 @@ class Card extends Component {
       cardName,
       cardDesc
     } = this.props;
-
     const { isModalShowed } = this.state;
 
     return (

@@ -56,18 +56,20 @@ const modal = props => {
         <b>Комментарии</b>
         <Comment onCommentSaved={value => onCommentSaved(value)} />
         <div className={classes.Comment}>
-          {comments.map((comment, index) => (
-            <Comment
-              isItem={true}
-              key={index}
-              onCommentChange={newValue =>
-                onCommentChange(newValue, comment.id)
-              }
-              commentText={comment.value}
-              onCommentDelete={() => onCommentDelete(comment.id)}
-              username={username}
-            />
-          ))}
+          {comments.map((comment, index) => {
+            const { id, value } = comment;
+
+            return (
+              <Comment
+                isItem={true}
+                key={index}
+                onCommentChange={newValue => onCommentChange(newValue, id)}
+                commentText={value}
+                onCommentDelete={() => onCommentDelete(id)}
+                username={username}
+              />
+            );
+          })}
         </div>
       </Modal.Body>
       <Modal.Footer>
