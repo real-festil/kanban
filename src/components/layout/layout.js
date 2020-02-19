@@ -16,7 +16,6 @@ class Layout extends Component {
     username: "",
     cards: [],
     comments: [],
-    uniqueId: uuidv4(),
     isLoginShow: false
   };
 
@@ -41,7 +40,7 @@ class Layout extends Component {
   };
 
   onCardAdded = (value, id) => {
-    const { cards, uniqueId } = this.state;
+    const { cards } = this.state;
 
     if (value === "") {
       alert("Введите заголовок");
@@ -51,14 +50,13 @@ class Layout extends Component {
           cards: [
             ...cards,
             {
-              id: uniqueId,
+              id: uuidv4(),
               colId: id,
               name: value,
               comments: 0,
               cardDesc: ""
             }
-          ],
-          uniqueId: uuidv4()
+          ]
         },
         () => localStorage.setItem("state", JSON.stringify(this.state))
       );
@@ -88,20 +86,19 @@ class Layout extends Component {
   };
 
   onCommentSaved = (value, cardId) => {
-    const { comments, uniqueId, username } = this.state;
+    const { comments, username } = this.state;
 
     this.setState(
       {
         comments: [
           ...comments,
           {
-            id: uniqueId,
+            id: uuidv4(),
             cardId: cardId,
             value: value,
             username: username
           }
-        ],
-        uniqueId: uuidv4()
+        ]
       },
       () => localStorage.setItem("state", JSON.stringify(this.state))
     );
