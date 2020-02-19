@@ -4,21 +4,21 @@ import classes from "./description.module.css";
 
 class Description extends Component {
   state = {
-    isDescFocused: false,
+    isOpened: false,
     description: this.props.cardDesc
   };
 
-  onDescFocused = () => {
-    this.setState({ isDescFocused: true });
+  onDescOpened = () => {
+    this.setState({ isOpened: true });
   };
 
   onDescSaved = value => {
-    this.setState({ isDescFocused: false });
+    this.setState({ isOpened: false });
     this.props.onDescSaved(value);
   };
 
   onDescUndo = () => {
-    this.setState({ isDescFocused: false, description: this.props.cardDesc });
+    this.setState({ isOpened: false, description: this.props.cardDesc });
   };
 
   onDescChanged = e => {
@@ -26,12 +26,12 @@ class Description extends Component {
   };
 
   render() {
-    const { isDescFocused, description } = this.state;
+    const { isOpened, description } = this.state;
 
     return (
       <>
         <b>Описание</b>
-        {isDescFocused ? (
+        {isOpened ? (
           <div>
             <textarea
               autoFocus
@@ -50,9 +50,7 @@ class Description extends Component {
             </Button>
           </div>
         ) : (
-          <p onClick={this.onDescFocused}>
-            {description || "Введите описание"}
-          </p>
+          <p onClick={this.onDescOpened}>{description || "Введите описание"}</p>
         )}
       </>
     );
