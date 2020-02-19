@@ -4,28 +4,28 @@ import classes from "./addCard.module.css";
 class AddCard extends Component {
   state = {
     cardName: "",
-    isCardInputFocused: false
+    isCardFormOpened: false
   };
 
   onCardAdded = () => {
     this.props.onCardAdded(this.state.cardName);
-    this.inputBlurHandler();
+    this.onCardFormClosed();
   };
 
-  inputBlurHandler = () =>
-    this.setState({ cardName: "", isCardInputFocused: false });
+  onCardFormClosed = () =>
+    this.setState({ cardName: "", isCardFormOpened: false });
 
   inputKeyHandler = e => {
     if (e.key === "Enter") this.onCardAdded();
-    if (e.key === "Escape") this.inputBlurHandler();
+    if (e.key === "Escape") this.onCardFormClosed();
   };
 
   render() {
-    const { isCardInputFocused, cardName } = this.state;
+    const { isCardFormOpened, cardName } = this.state;
 
     return (
       <>
-        {isCardInputFocused ? (
+        {isCardFormOpened ? (
           <div className={classes.AddCardControl}>
             <input
               autoFocus
@@ -42,7 +42,7 @@ class AddCard extends Component {
               Добавить
             </button>
             <button
-              onClick={this.inputBlurHandler}
+              onClick={this.onCardFormClosed}
               type="button"
               className="btn btn-secondary"
             >
@@ -53,7 +53,7 @@ class AddCard extends Component {
           <div className={classes.ButtonWrapper}>
             <button
               type="button"
-              onClick={() => this.setState({ isCardInputFocused: true })}
+              onClick={() => this.setState({ isCardFormOpened: true })}
               className="btn btn-outline-primary"
             >
               Добавить карточку
