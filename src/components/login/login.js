@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Modal, Button } from "react-bootstrap";
+import classes from "./login.module.css";
 
 class Login extends Component {
   state = {
@@ -28,8 +29,8 @@ class Login extends Component {
         <Modal.Header>
           <Modal.Title id="contained-modal-title-vcenter">Вход</Modal.Title>
         </Modal.Header>
-        <Modal.Body style={{ display: "flex", alignItems: "center" }}>
-          <p style={{ margin: "0" }}>Имя пользователя: </p>
+        <Modal.Body className={classes.ModalBody}>
+          <p>Имя пользователя: </p>
           <input
             placeholder="username"
             value={this.state.username}
@@ -37,7 +38,7 @@ class Login extends Component {
           ></input>
         </Modal.Body>
         <Modal.Footer>
-          <Button onClick={this.onLogin}>Log-in</Button>
+          <Button onClick={this.onLogin}>Войти</Button>
         </Modal.Footer>
       </Modal>
     );

@@ -28,7 +28,7 @@ class Description extends Component {
               className={classes.DescriptionTextArea}
             />
             <Button
-              style={{ marginRight: "20px" }}
+              className={classes.SaveButton}
               onClick={() => this.onDescSaved(description)}
             >
               Сохранить
