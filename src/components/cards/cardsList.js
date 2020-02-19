@@ -20,21 +20,21 @@ const cardsList = props => {
   return (
     <>
       {cards.map((card, index) => {
-        const { cardName, cardId, cardDesc } = card;
+        const { name, id, desc } = card;
 
         return (
           <div key={index}>
             <Card
-              index={cardId}
-              cardNameValue={cardName}
-              onCardDelete={() => onCardDelete(cardId)}
-              cardName={cardName}
+              index={id}
+              cardNameValue={name}
+              onCardDelete={() => onCardDelete(id)}
+              cardName={name}
               colName={colName}
-              changeCardName={value => changeCardName(value, cardId)}
-              cardDesc={cardDesc}
-              onDescSaved={value => onDescSaved(value, cardId)}
-              onCommentSaved={value => onCommentSaved(value, cardId)}
-              comments={comments.filter(comment => comment.cardId === cardId)}
+              changeCardName={value => changeCardName(value, id)}
+              cardDesc={desc}
+              onDescSaved={value => onDescSaved(value, id)}
+              onCommentSaved={value => onCommentSaved(value, id)}
+              comments={comments.filter(comment => comment.cardId === id)}
               onCommentChange={onCommentChange}
               onCommentDelete={onCommentDelete}
               username={username}
