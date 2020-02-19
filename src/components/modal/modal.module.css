@@ -3,4 +3,22 @@
   font-weight: normal !important;
   margin-bottom: 0;
 }
+
+.CommentControl {
+  width: 150px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+  font-size: 12px;
+  color: #5e6c84;
+  margin: 5px 0 0 5px;
+  text-decoration: underline;
+}
+
+.CommentControl p {
+  cursor: pointer;
+}
 /*# sourceMappingURL=modal.module.css.map */

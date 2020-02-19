@@ -73,7 +73,6 @@ class Layout extends Component {
   };
 
   changeCardData = (data, cardId) => {
-    console.log(data);
     this.setState(
       prevState => ({
         cards: prevState.cards.map(card =>
