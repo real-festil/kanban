@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import { Container, Row, Col } from "react-bootstrap";
+import { connect } from "react-redux";
+import { editColName } from "../../actions";
 import classes from "./layout.module.css";
 import Column from "../column/column";
 import Login from "../login/login";
@@ -131,7 +133,8 @@ class Layout extends Component {
   };
 
   render() {
-    const { columnsList, isLoginShow } = this.state;
+    const { isLoginShow } = this.state;
+    const { columnsList, dispatch } = this.props;
 
     return (
       <>
@@ -152,13 +155,14 @@ class Layout extends Component {
                 <Col xs={6} sm={3} md={3} key={column.id}>
                   <Column
                     colName={column.name}
+                    colId={column.id}
                     onCardAdded={value => this.onCardAdded(value, column.id)}
                     onCardDelete={this.onCardDelete}
                     changeCardName={(value, cardId) =>
                       this.changeCardData({ name: value }, cardId)
                     }
                     changeColumnName={value =>
-                      this.changeColumnName(value, column.id)
+                      dispatch(editColName(column.id, value))
                     }
                     cards={filteredCards}
                     onDescSaved={(value, cardId) =>
@@ -181,4 +185,10 @@ class Layout extends Component {
   }
 }
 
-export default Layout;
+function mapStateToProps(state) {
+  return {
+    columnsList: state.columnsList
+  };
+}
+
+export default connect(mapStateToProps)(Layout);

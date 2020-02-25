@@ -13,6 +13,7 @@ class Card extends Component {
   render() {
     const {
       colName,
+      cardId,
       changeCardName,
       onCardDelete,
       onDescSaved,
@@ -46,6 +47,7 @@ class Card extends Component {
         </div>
         <Modal
           cardDesc={cardDesc}
+          cardId={cardId}
           onDescSaved={onDescSaved}
           onCardDelete={onCardDelete}
           clicked={this.changeDesc}

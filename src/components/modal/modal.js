@@ -4,19 +4,18 @@ import Caption from "../caption/caption";
 import Description from "../description/description";
 import CommentCreateForm from "../comments/commentCreateForm/commentCreateForm";
 import CommentItem from "../comments/commentItem/commentItem";
+import * as actions from "../../actions";
+import { connect } from "react-redux";
 import classes from "./modal.module.css";
 
 const modal = props => {
-  const onDelete = () => {
-    const { onCardDelete, onHide } = props;
-
-    onCardDelete();
-    onHide();
-  };
-
   const {
     colName,
-    changeCardName,
+    editCardName,
+    editCardDesc,
+    deleteCard,
+    cardId,
+    //changeCardName,
     onDescSaved,
     onDescUndo,
     onCommentSaved,
@@ -30,6 +29,13 @@ const modal = props => {
     cardDesc
   } = props;
 
+  const onDelete = () => {
+    const { onHide } = props;
+
+    deleteCard(cardId);
+    onHide();
+  };
+
   return (
     <Modal
       show={show}
@@ -40,15 +46,17 @@ const modal = props => {
     >
       <Modal.Header closeButton>
         <Modal.Title id="contained-modal-title-vcenter">
-          <Caption captionName={cardName} changeInputName={changeCardName} />
+          <Caption
+            captionName={cardName}
+            changeInputName={text => editCardName(cardId, text)}
+          />
           <p className={classes.SubHeading}>в колонке {colName}</p>
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <Description
           cardDesc={cardDesc}
-          onDescSaved={onDescSaved}
-          onDescUndo={onDescUndo}
+          onDescSaved={text => editCardDesc(cardId, text)}
         />
       </Modal.Body>
       <Modal.Body>
@@ -77,4 +85,4 @@ const modal = props => {
   );
 };
 
-export default modal;
+export default connect(null, actions)(modal);

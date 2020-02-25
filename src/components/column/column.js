@@ -7,6 +7,7 @@ import Caption from "../caption/caption";
 const column = props => {
   const {
     colName,
+    colId,
     cards,
     changeCardName,
     changeColumnName,
@@ -30,6 +31,7 @@ const column = props => {
           <Container>
             <CardsList
               colName={colName}
+              colId={colId}
               cards={cards}
               changeCardName={changeCardName}
               onCardAdded={onCardAdded}
