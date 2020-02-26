@@ -8,6 +8,7 @@ import * as actions from "../../actions";
 import { connect } from "react-redux";
 import classes from "./commentModal.module.css";
 import { v4 as uuidv4 } from "uuid";
+import { getCardComments } from "../../selectors";
 
 const modal = props => {
   const {
@@ -30,7 +31,7 @@ const modal = props => {
   const onDelete = () => {
     const { onHide } = props;
 
-    deleteCard(cardId);
+    deleteCard({ id: cardId });
     onHide();
   };
 
@@ -46,7 +47,7 @@ const modal = props => {
         <Modal.Title id="contained-modal-title-vcenter">
           <Caption
             captionName={cardName}
-            changeInputName={text => editCardName(cardId, text)}
+            changeInputName={text => editCardName({ text: text, id: cardId })}
           />
           <p className={classes.SubHeading}>в колонке {colName}</p>
         </Modal.Title>
@@ -54,26 +55,26 @@ const modal = props => {
       <Modal.Body>
         <Description
           cardDesc={cardDesc}
-          onDescSaved={text => editCardDesc(cardId, text)}
+          onDescSaved={text => editCardDesc({ cardId: cardId, text: text })}
         />
       </Modal.Body>
       <Modal.Body>
         <CommentCreateForm
-          onCommentSaved={text => addComment(uuidv4(), cardId, text)}
+          onCommentSaved={text =>
+            addComment({ id: uuidv4(), cardId: cardId, text: text })
+          }
         />
         {comments.map((comment, index) => {
           const { id, value } = comment;
 
           return (
-            comment.cardId === cardId && (
-              <CommentItem
-                key={index}
-                onCommentChange={text => editComment(id, text)}
-                commentText={value}
-                onCommentDelete={() => deleteComment(id)}
-                username={username}
-              />
-            )
+            <CommentItem
+              key={index}
+              onCommentChange={text => editComment({ id: id, text: text })}
+              commentText={value}
+              onCommentDelete={() => deleteComment({ id: id })}
+              username={username}
+            />
           );
         })}
       </Modal.Body>
@@ -87,9 +88,9 @@ const modal = props => {
   );
 };
 
-function mapStateToProps(state) {
+function mapStateToProps(state, props) {
   return {
-    comments: state.comments
+    comments: getCardComments(state, props.cardId)
   };
 }
 

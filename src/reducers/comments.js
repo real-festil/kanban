@@ -1,33 +1,30 @@
-import {
-  ADD_COMMENT,
-  EDIT_COMMENT,
-  DELETE_COMMENT
-} from "../constants/actionTypes";
+import { addComment, editComment, deleteComment } from "../actions";
+import { handleActions } from "redux-actions";
 
 const initialState = [];
 
-export default function reducer(state = initialState, action) {
-  switch (action.type) {
-    case ADD_COMMENT:
+export default handleActions(
+  {
+    [addComment](state, action) {
       return [
         ...state,
         {
-          id: action.id,
-          cardId: action.cardId,
-          value: action.text
+          id: action.payload.id,
+          cardId: action.payload.cardId,
+          value: action.payload.text
         }
       ];
-    case EDIT_COMMENT:
-      return [
-        ...state.map(comment =>
-          comment.id === action.id
-            ? { ...comment, value: action.text }
-            : comment
-        )
-      ];
-    case DELETE_COMMENT:
-      return [...state.filter(comment => comment.id !== action.id)];
-    default:
-      return state;
-  }
-}
+    },
+    [editComment](state, action) {
+      return state.map(comment =>
+        comment.id === action.payload.id
+          ? { ...comment, value: action.payload.text }
+          : comment
+      );
+    },
+    [deleteComment](state, action) {
+      return state.filter(comment => comment.id !== action.payload.id);
+    }
+  },
+  initialState
+);

@@ -1,4 +1,5 @@
-import { EDIT_COL_NAME } from "../constants/actionTypes";
+import { handleActions } from "redux-actions";
+import { editColName } from "../actions";
 
 const initialState = [
   { id: 0, name: "ToDo" },
@@ -7,15 +8,15 @@ const initialState = [
   { id: 3, name: "Done" }
 ];
 
-export default function reducer(state = initialState, action) {
-  switch (action.type) {
-    case EDIT_COL_NAME:
-      return [
-        ...state.map(column =>
-          column.id === action.id ? { ...column, name: action.text } : column
-        )
-      ];
-    default:
-      return state;
-  }
-}
+export default handleActions(
+  {
+    [editColName](state, action) {
+      return state.map(column =>
+        column.id === action.payload.id
+          ? { ...column, name: action.payload.text }
+          : column
+      );
+    }
+  },
+  initialState
+);

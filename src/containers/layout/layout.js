@@ -5,6 +5,7 @@ import { editColName } from "../../actions";
 import classes from "./layout.module.css";
 import Column from "../../components/column/column";
 import Login from "../../components/login/login";
+import { getColumns } from "../../selectors";
 
 class Layout extends Component {
   state = {
@@ -38,9 +39,9 @@ class Layout extends Component {
                   <Column
                     colName={column.name}
                     colId={column.id}
-                    changeColumnName={value =>
-                      dispatch(editColName(column.id, value))
-                    }
+                    changeColumnName={value => {
+                      dispatch(editColName({ id: column.id, text: value }));
+                    }}
                     comments={comments}
                     username={username}
                   />
@@ -57,7 +58,7 @@ class Layout extends Component {
 
 function mapStateToProps(state) {
   return {
-    columnsList: state.columnsList
+    columnsList: getColumns(state)
   };
 }
 

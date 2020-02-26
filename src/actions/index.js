@@ -1,49 +1,17 @@
-import * as types from "../constants/actionTypes";
+import { createAction } from "redux-actions";
 
-export const editColName = (id, text) => ({
-  type: types.EDIT_COL_NAME,
-  id,
-  text
-});
+export const editColName = createAction("EDIT_COL_NAME");
 
-export const addCard = (id, colId, text) => ({
-  type: types.ADD_CARD,
-  id,
-  colId,
-  text
-});
+export const addCard = createAction("ADD_CARD");
 
-export const editCardName = (id, text) => ({
-  type: types.EDIT_CARD_NAME,
-  id,
-  text
-});
+export const editCardName = createAction("EDIT_CARD_NAME");
 
-export const deleteCard = id => ({
-  type: types.DELETE_CARD,
-  id
-});
+export const deleteCard = createAction("DELETE_CARD");
 
-export const editCardDesc = (id, text) => ({
-  type: types.EDIT_CARD_DESC,
-  id,
-  text
-});
+export const editCardDesc = createAction("EDIT_CARD_DESC");
 
-export const addComment = (id, cardId, text) => ({
-  type: types.ADD_COMMENT,
-  id,
-  cardId,
-  text
-});
+export const addComment = createAction("ADD_COMMENT");
 
-export const editComment = (id, text) => ({
-  type: types.EDIT_COMMENT,
-  id,
-  text
-});
+export const editComment = createAction("EDIT_COMMENT");
 
-export const deleteComment = id => ({
-  type: types.DELETE_COMMENT,
-  id
-});
+export const deleteComment = createAction("DELETE_COMMENT");
