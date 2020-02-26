@@ -30,9 +30,10 @@ export const editCardDesc = (id, text) => ({
   text
 });
 
-export const addComment = (id, text) => ({
+export const addComment = (id, cardId, text) => ({
   type: types.ADD_COMMENT,
   id,
+  cardId,
   text
 });
 

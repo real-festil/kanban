@@ -7,6 +7,7 @@ import CommentItem from "../comments/commentItem/commentItem";
 import * as actions from "../../actions";
 import { connect } from "react-redux";
 import classes from "./modal.module.css";
+import { v4 as uuidv4 } from "uuid";
 
 const modal = props => {
   const {
@@ -14,6 +15,9 @@ const modal = props => {
     editCardName,
     editCardDesc,
     deleteCard,
+    addComment,
+    editComment,
+    deleteComment,
     cardId,
     //changeCardName,
     onDescSaved,
@@ -60,18 +64,22 @@ const modal = props => {
         />
       </Modal.Body>
       <Modal.Body>
-        <CommentCreateForm onCommentSaved={onCommentSaved} />
+        <CommentCreateForm
+          onCommentSaved={text => addComment(uuidv4(), cardId, text)}
+        />
         {comments.map((comment, index) => {
           const { id, value } = comment;
 
           return (
-            <CommentItem
-              key={index}
-              onCommentChange={newValue => onCommentChange(newValue, id)}
-              commentText={value}
-              onCommentDelete={() => onCommentDelete(id)}
-              username={username}
-            />
+            comment.cardId === cardId && (
+              <CommentItem
+                key={index}
+                onCommentChange={text => editComment(id, text)}
+                commentText={value}
+                onCommentDelete={() => deleteComment(id)}
+                username={username}
+              />
+            )
           );
         })}
       </Modal.Body>
@@ -85,4 +93,10 @@ const modal = props => {
   );
 };
 
-export default connect(null, actions)(modal);
+function mapStateToProps(state) {
+  return {
+    comments: state.comments
+  };
+}
+
+export default connect(mapStateToProps, actions)(modal);
