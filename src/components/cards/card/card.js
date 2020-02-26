@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Modal from "../../../containers/commentModal/commentModal";
+import Modal from "../../../containers/cardModal/cardModal";
 import classes from "./card.module.css";
 
 class Card extends Component {

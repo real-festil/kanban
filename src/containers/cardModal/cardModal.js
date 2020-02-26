@@ -6,7 +6,7 @@ import CommentCreateForm from "../../components/comments/commentCreateForm/comme
 import CommentItem from "../../components/comments/commentItem/commentItem";
 import * as actions from "../../actions";
 import { connect } from "react-redux";
-import classes from "./commentModal.module.css";
+import classes from "./cardModal.module.css";
 import { v4 as uuidv4 } from "uuid";
 import { getCardComments } from "../../selectors";
 

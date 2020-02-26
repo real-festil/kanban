@@ -2,8 +2,8 @@
     "version": 3,
     "mappings": "AAAA,AAAA,WAAW,CAAC;EACV,SAAS,EAAE,eAAe;EAC1B,WAAW,EAAE,iBAAiB;EAC9B,aAAa,EAAE,CAAC;CACjB",
     "sources": [
-        "commentModal.module.scss"
+        "cardModal.module.scss"
     ],
     "names": [],
-    "file": "commentModal.module.css"
+    "file": "cardModal.module.css"
 }
