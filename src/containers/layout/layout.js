@@ -5,18 +5,17 @@ import * as actions from "../../actions";
 import classes from "./layout.module.css";
 import Column from "../../components/column/column";
 import Login from "../../components/login/login";
-import { getColumns } from "../../selectors";
+import { getColumns, getLogin } from "../../selectors";
 import PropTypes from "prop-types";
 
 class Layout extends Component {
   state = {
-    isLoginShow: false
+    isLoginShow: this.props.username ? false : true
   };
 
   onHide = username => {
-    this.setState({ username: username, isLoginShow: false }, () =>
-      localStorage.setItem("state", JSON.stringify(this.state))
-    );
+    this.props.login({ text: username });
+    this.setState({ isLoginShow: false });
   };
 
   render() {
@@ -55,12 +54,14 @@ class Layout extends Component {
 
 Layout.propTypes = {
   columnsList: PropTypes.array.isRequired,
-  editColName: PropTypes.func.isRequired
+  editColName: PropTypes.func.isRequired,
+  username: PropTypes.string
 };
 
 function mapStateToProps(state) {
   return {
-    columnsList: getColumns(state)
+    columnsList: getColumns(state),
+    username: getLogin(state)
   };
 }
 

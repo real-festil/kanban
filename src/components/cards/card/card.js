@@ -12,7 +12,7 @@ class Card extends Component {
     this.setState({ isModalShowed: !this.state.isModalShowed });
 
   render() {
-    const { colName, cardId, cardName, cardDesc } = this.props;
+    const { colName, cardId, cardName, cardDesc, comments } = this.props;
     const { isModalShowed } = this.state;
 
     return (
@@ -30,7 +30,7 @@ class Card extends Component {
               src="https://image.flaticon.com/icons/svg/1946/1946412.svg"
               alt=""
             />
-            <p>0</p>
+            <p>{comments}</p>
           </div>
         </div>
         <Modal

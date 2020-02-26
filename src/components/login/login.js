@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Modal, Button } from "react-bootstrap";
 import classes from "./login.module.css";
+import PropTypes from "prop-types";
 
 class Login extends Component {
   state = {
@@ -44,5 +45,9 @@ class Login extends Component {
     );
   }
 }
+
+Login.propTypes = {
+  onHide: PropTypes.func.isRequired
+};
 
 export default Login;

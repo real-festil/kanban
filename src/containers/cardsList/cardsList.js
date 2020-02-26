@@ -9,16 +9,17 @@ import PropTypes from "prop-types";
 
 const cardsList = props => {
   const { colName, addCard, colId, cards } = props;
-
   return (
     <>
       {cards.map((card, index) => {
         const { name, id, cardDesc } = card;
+
         return (
           <div key={index}>
             <Card
               index={id}
               cardId={id}
+              comments={cards[0].comments.length}
               cardNameValue={name}
               cardName={name}
               colName={colName}
