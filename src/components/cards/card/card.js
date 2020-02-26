@@ -51,7 +51,8 @@ Card.propTypes = {
   colName: PropTypes.string.isRequired,
   cardId: PropTypes.string.isRequired,
   cardName: PropTypes.string.isRequired,
-  cardDesc: PropTypes.string
+  cardDesc: PropTypes.string,
+  comments: PropTypes.number.isRequired
 };
 
 export default Card;
