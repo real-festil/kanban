@@ -1,7 +1,7 @@
 import React from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import classes from "./column.module.css";
-import CardsList from "../cards/cardsList";
+import CardsList from "../../containers/cardsList/cardsList";
 import Caption from "../caption/caption";
 
 const column = props => {

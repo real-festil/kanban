@@ -1,6 +1,6 @@
 import React from "react";
-import Card from "./card/card";
-import AddCard from "./cardControl/addCard/addCard";
+import Card from "../../components/cards/card/card";
+import AddCard from "../../components/cards/addCard/addCard";
 import * as actions from "../../actions";
 import { connect } from "react-redux";
 import { v4 as uuidv4 } from "uuid";

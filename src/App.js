@@ -1,6 +1,6 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import Layout from "./components/layout/layout";
+import Layout from "./containers/layout/layout";
 import "./App.css";
 
 function App() {

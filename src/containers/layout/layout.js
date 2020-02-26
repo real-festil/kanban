@@ -3,8 +3,8 @@ import { Container, Row, Col } from "react-bootstrap";
 import { connect } from "react-redux";
 import { editColName } from "../../actions";
 import classes from "./layout.module.css";
-import Column from "../column/column";
-import Login from "../login/login";
+import Column from "../../components/column/column";
+import Login from "../../components/login/login";
 import { v4 as uuidv4 } from "uuid";
 
 class Layout extends Component {

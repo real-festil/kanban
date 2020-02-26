@@ -2,8 +2,8 @@
     "version": 3,
     "mappings": "AAAA,AAAA,WAAW,CAAC;EACV,SAAS,EAAE,eAAe;EAC1B,WAAW,EAAE,iBAAiB;EAC9B,aAAa,EAAE,CAAC;CACjB",
     "sources": [
-        "modal.module.scss"
+        "commentModal.module.scss"
     ],
     "names": [],
-    "file": "modal.module.css"
+    "file": "commentModal.module.css"
 }

@@ -1,12 +1,12 @@
 import React from "react";
 import { Modal, Button } from "react-bootstrap";
-import Caption from "../caption/caption";
-import Description from "../description/description";
-import CommentCreateForm from "../comments/commentCreateForm/commentCreateForm";
-import CommentItem from "../comments/commentItem/commentItem";
+import Caption from "../../components/caption/caption";
+import Description from "../../components/description/description";
+import CommentCreateForm from "../../components/comments/commentCreateForm/commentCreateForm";
+import CommentItem from "../../components/comments/commentItem/commentItem";
 import * as actions from "../../actions";
 import { connect } from "react-redux";
-import classes from "./modal.module.css";
+import classes from "./commentModal.module.css";
 import { v4 as uuidv4 } from "uuid";
 
 const modal = props => {
