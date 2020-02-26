@@ -11,13 +11,7 @@ const column = props => {
     cards,
     changeCardName,
     changeColumnName,
-    onCardAdded,
-    onCardDelete,
-    onDescSaved,
-    onCommentSaved,
     comments,
-    onCommentChange,
-    onCommentDelete,
     username
   } = props;
 
@@ -34,13 +28,7 @@ const column = props => {
               colId={colId}
               cards={cards}
               changeCardName={changeCardName}
-              onCardAdded={onCardAdded}
-              onCardDelete={onCardDelete}
-              onDescSaved={onDescSaved}
-              onCommentSaved={onCommentSaved}
               comments={comments}
-              onCommentChange={onCommentChange}
-              onCommentDelete={onCommentDelete}
               username={username}
             />
           </Container>

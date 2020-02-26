@@ -6,21 +6,7 @@ import { connect } from "react-redux";
 import { v4 as uuidv4 } from "uuid";
 
 const cardsList = props => {
-  const {
-    colName,
-    addCard,
-    colId,
-    cards,
-    changeCardName,
-    // onCardAdded,
-    onCardDelete,
-    onDescSaved,
-    onCommentSaved,
-    comments,
-    onCommentChange,
-    onCommentDelete,
-    username
-  } = props;
+  const { colName, addCard, colId, cards, changeCardName, username } = props;
 
   return (
     <>
@@ -33,16 +19,10 @@ const cardsList = props => {
                 index={id}
                 cardId={id}
                 cardNameValue={name}
-                onCardDelete={() => onCardDelete(id)}
                 cardName={name}
                 colName={colName}
                 changeCardName={value => changeCardName(value, id)}
                 cardDesc={cardDesc}
-                onDescSaved={value => onDescSaved(value, id)}
-                onCommentSaved={value => onCommentSaved(value, id)}
-                comments={comments.filter(comment => comment.cardId === id)}
-                onCommentChange={onCommentChange}
-                onCommentDelete={onCommentDelete}
                 username={username}
               />
             </div>

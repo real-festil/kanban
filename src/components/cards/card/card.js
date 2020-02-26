@@ -14,13 +14,7 @@ class Card extends Component {
     const {
       colName,
       cardId,
-      changeCardName,
-      onCardDelete,
-      onDescSaved,
-      onCommentSaved,
       comments,
-      onCommentChange,
-      onCommentDelete,
       username,
       cardName,
       cardDesc
@@ -42,23 +36,17 @@ class Card extends Component {
               src="https://image.flaticon.com/icons/svg/1946/1946412.svg"
               alt=""
             />
-            <p>{comments.length}</p>
+            <p>0</p>
           </div>
         </div>
         <Modal
           cardDesc={cardDesc}
           cardId={cardId}
-          onDescSaved={onDescSaved}
-          onCardDelete={onCardDelete}
           clicked={this.changeDesc}
           show={isModalShowed}
           onHide={this.onModalToggle}
           cardName={cardName}
           colName={colName}
-          changeCardName={changeCardName}
-          onCommentSaved={onCommentSaved}
-          onCommentChange={onCommentChange}
-          onCommentDelete={onCommentDelete}
           comments={comments}
           username={username}
         />
