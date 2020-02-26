@@ -1,7 +1,7 @@
 import { handleActions } from "redux-actions";
 import { editCardDesc, addCard, editCardName, deleteCard } from "../actions";
 
-const initialState = [{}];
+const initialState = [];
 
 export default handleActions(
   {
@@ -28,8 +28,9 @@ export default handleActions(
       return state.filter(card => card.id !== action.payload.id);
     },
     [editCardDesc](state, action) {
+      console.log(action);
       return state.map(card =>
-        card.id === action.id
+        card.id === action.payload.cardId
           ? { ...card, cardDesc: action.payload.text }
           : card
       );
