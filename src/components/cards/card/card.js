@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Modal from "../../../containers/cardModal/cardModal";
 import classes from "./card.module.css";
+import PropTypes from "prop-types";
 
 class Card extends Component {
   state = {
@@ -11,14 +12,7 @@ class Card extends Component {
     this.setState({ isModalShowed: !this.state.isModalShowed });
 
   render() {
-    const {
-      colName,
-      cardId,
-      comments,
-      username,
-      cardName,
-      cardDesc
-    } = this.props;
+    const { colName, cardId, cardName, cardDesc } = this.props;
     const { isModalShowed } = this.state;
 
     return (
@@ -47,12 +41,17 @@ class Card extends Component {
           onHide={this.onModalToggle}
           cardName={cardName}
           colName={colName}
-          comments={comments}
-          username={username}
         />
       </>
     );
   }
 }
+
+Card.propTypes = {
+  colName: PropTypes.string.isRequired,
+  cardId: PropTypes.string.isRequired,
+  cardName: PropTypes.string.isRequired,
+  cardDesc: PropTypes.string
+};
 
 export default Card;

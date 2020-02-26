@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Button } from "react-bootstrap";
 import classes from "./description.module.css";
+import PropTypes from "prop-types";
 
 class Description extends Component {
   state = {
@@ -53,5 +54,10 @@ class Description extends Component {
     );
   }
 }
+
+Description.propTypes = {
+  cardDesc: PropTypes.string,
+  onDescSaved: PropTypes.func.isRequired
+};
 
 export default Description;

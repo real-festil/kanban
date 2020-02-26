@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import classes from "./caption.module.css";
+import PropTypes from "prop-types";
 
 class Caption extends Component {
   state = {
@@ -9,12 +10,12 @@ class Caption extends Component {
 
   onInputBlurred = () => {
     const { labelValue } = this.state;
-    const { captionName } = this.props;
+    const { captionName, changeInputName } = this.props;
 
     this.setState({ isLabelShowed: false });
     if (!labelValue) this.setState({ labelValue: captionName });
 
-    this.props.changeInputName(labelValue ? labelValue : captionName);
+    changeInputName(labelValue ? labelValue : captionName);
   };
 
   inputKeyHandler = e => {
@@ -46,5 +47,10 @@ class Caption extends Component {
     );
   }
 }
+
+Caption.propTypes = {
+  captionName: PropTypes.string.isRequired,
+  changeInputName: PropTypes.func.isRequired
+};
 
 export default Caption;

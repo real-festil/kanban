@@ -15,3 +15,5 @@ export const addComment = createAction("ADD_COMMENT");
 export const editComment = createAction("EDIT_COMMENT");
 
 export const deleteComment = createAction("DELETE_COMMENT");
+
+export const login = createAction("LOGIN");

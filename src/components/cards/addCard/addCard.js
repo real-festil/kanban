@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import classes from "./addCard.module.css";
+import PropTypes from "prop-types";
 
 class AddCard extends Component {
   state = {
@@ -64,5 +65,9 @@ class AddCard extends Component {
     );
   }
 }
+
+AddCard.propTypes = {
+  onCardAdded: PropTypes.func.isRequired
+};
 
 export default AddCard;

@@ -9,6 +9,7 @@ import { connect } from "react-redux";
 import classes from "./cardModal.module.css";
 import { v4 as uuidv4 } from "uuid";
 import { getCardComments } from "../../selectors";
+import PropTypes from "prop-types";
 
 const modal = props => {
   const {
@@ -21,7 +22,6 @@ const modal = props => {
     deleteComment,
     cardId,
     comments,
-    username,
     show,
     onHide,
     cardName,
@@ -73,7 +73,6 @@ const modal = props => {
               onCommentChange={text => editComment({ id: id, text: text })}
               commentText={value}
               onCommentDelete={() => deleteComment({ id: id })}
-              username={username}
             />
           );
         })}
@@ -86,6 +85,22 @@ const modal = props => {
       </Modal.Footer>
     </Modal>
   );
+};
+
+modal.propTypes = {
+  colName: PropTypes.string.isRequired,
+  cardName: PropTypes.string.isRequired,
+  cardDesc: PropTypes.string,
+  editCardName: PropTypes.func.isRequired,
+  editCardDesc: PropTypes.func.isRequired,
+  deleteCard: PropTypes.func.isRequired,
+  addComment: PropTypes.func.isRequired,
+  editComment: PropTypes.func.isRequired,
+  deleteComment: PropTypes.func.isRequired,
+  cardId: PropTypes.string.isRequired,
+  comments: PropTypes.array,
+  show: PropTypes.bool.isRequired,
+  onHide: PropTypes.func.isRequired
 };
 
 function mapStateToProps(state, props) {

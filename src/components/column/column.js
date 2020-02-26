@@ -3,17 +3,10 @@ import { Container, Row, Col } from "react-bootstrap";
 import classes from "./column.module.css";
 import CardsList from "../../containers/cardsList/cardsList";
 import Caption from "../caption/caption";
+import PropTypes from "prop-types";
 
 const column = props => {
-  const {
-    colName,
-    colId,
-    cards,
-    changeCardName,
-    changeColumnName,
-    comments,
-    username
-  } = props;
+  const { colName, colId, changeColumnName } = props;
 
   return (
     <Container className={classes.Column}>
@@ -23,19 +16,18 @@ const column = props => {
         </Row>
         <Row>
           <Container>
-            <CardsList
-              colName={colName}
-              colId={colId}
-              cards={cards}
-              changeCardName={changeCardName}
-              comments={comments}
-              username={username}
-            />
+            <CardsList colName={colName} colId={colId} />
           </Container>
         </Row>
       </Col>
     </Container>
   );
+};
+
+column.propTypes = {
+  colName: PropTypes.string.isRequired,
+  colId: PropTypes.number.isRequired,
+  changeColumnName: PropTypes.func.isRequired
 };
 
 export default column;

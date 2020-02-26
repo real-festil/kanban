@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Button } from "react-bootstrap";
 import classes from "./commentCreateForm.module.css";
+import PropTypes from "prop-types";
 
 class CommentCreateForm extends Component {
   state = {
@@ -47,5 +48,9 @@ class CommentCreateForm extends Component {
     );
   }
 }
+
+CommentCreateForm.propTypes = {
+  onCommentSaved: PropTypes.func.isRequired
+};
 
 export default CommentCreateForm;

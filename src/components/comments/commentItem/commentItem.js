@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Button } from "react-bootstrap";
 import classes from "./commentItem.module.css";
+import PropTypes from "prop-types";
 
 class CommentItem extends Component {
   state = {
@@ -52,5 +53,11 @@ class CommentItem extends Component {
     );
   }
 }
+
+CommentItem.propTypes = {
+  onCommentDelete: PropTypes.func.isRequired,
+  username: PropTypes.string.isRequired,
+  commentText: PropTypes.string
+};
 
 export default CommentItem;
