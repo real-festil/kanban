@@ -28,7 +28,6 @@ export default handleActions(
       return state.filter(card => card.id !== action.payload.id);
     },
     [editCardDesc](state, action) {
-      console.log(action);
       return state.map(card =>
         card.id === action.payload.cardId
           ? { ...card, cardDesc: action.payload.text }

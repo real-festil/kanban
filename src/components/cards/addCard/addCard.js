@@ -9,8 +9,10 @@ class AddCard extends Component {
   };
 
   onCardAdded = () => {
-    this.props.onCardAdded(this.state.cardName);
-    this.onCardFormClosed();
+    if (this.state.cardName) {
+      this.props.onCardAdded(this.state.cardName);
+      this.onCardFormClosed();
+    } else return alert("Введите имя карточки");
   };
 
   onCardFormClosed = () =>

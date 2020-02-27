@@ -15,7 +15,7 @@ const cardsList = props => {
         const { name, id, cardDesc } = card;
 
         return (
-          <div key={index}>
+          <div key={id}>
             <Card
               index={id}
               cardId={id}
