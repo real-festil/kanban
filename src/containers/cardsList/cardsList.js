@@ -19,7 +19,7 @@ const cardsList = props => {
             <Card
               index={id}
               cardId={id}
-              comments={cards[0].comments.length}
+              comments={cards[index].comments.length}
               cardNameValue={name}
               cardName={name}
               colName={colName}
