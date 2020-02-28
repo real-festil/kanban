@@ -1,7 +1,7 @@
 import { createSelector } from "reselect";
+import { getComments } from "./comments";
 
 const getCards = state => state.cards;
-const getComments = state => state.comments;
 
 export const getColumnCards = createSelector(
   getCards,
