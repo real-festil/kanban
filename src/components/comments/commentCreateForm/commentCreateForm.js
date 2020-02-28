@@ -10,6 +10,7 @@ class CommentCreateForm extends Component {
   };
 
   onCommentSaved = e => {
+    if (!this.state.commentText.trim()) return;
     this.props.onCommentSaved(this.state.commentText);
     this.setState({ isCommentFocus: false, commentText: "" });
   };

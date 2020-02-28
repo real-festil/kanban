@@ -47,7 +47,7 @@ class Description extends Component {
           </div>
         ) : (
           <p onClick={() => this.setState({ isOpened: true })}>
-            {description || "Введите описание"}
+            {description.trim() || "Введите описание"}
           </p>
         )}
       </>

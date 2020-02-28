@@ -13,9 +13,12 @@ class Caption extends Component {
     const { captionName, changeInputName } = this.props;
 
     this.setState({ isLabelShowed: false });
-    if (!labelValue) this.setState({ labelValue: captionName });
+    if (!labelValue.trim()) {
+      this.setState({ labelValue: captionName });
+      return;
+    }
 
-    changeInputName(labelValue ? labelValue : captionName);
+    changeInputName(labelValue);
   };
 
   inputKeyHandler = e => {

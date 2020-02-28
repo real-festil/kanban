@@ -4,22 +4,23 @@ import Caption from "../../components/caption/caption";
 import Description from "../../components/description/description";
 import CommentCreateForm from "../../components/comments/commentCreateForm/commentCreateForm";
 import CommentItem from "../../components/comments/commentItem/commentItem";
-import * as actions from "../../actions";
+import { deleteCard, editCardName, editCardDesc } from "../../reducers/cards";
+import {
+  addComment,
+  editComment,
+  deleteComment
+} from "../../reducers/comments";
 import { connect } from "react-redux";
 import classes from "./cardModal.module.css";
 import { v4 as uuidv4 } from "uuid";
-import { getCardComments, getLogin } from "../../selectors";
+import { getLogin } from "../../selectors/login";
+import { getCardComments } from "../../selectors/comments";
 import PropTypes from "prop-types";
 
 const modal = props => {
   const {
     colName,
-    editCardName,
-    editCardDesc,
-    deleteCard,
-    addComment,
-    editComment,
-    deleteComment,
+    dispatch,
     cardId,
     comments,
     show,
@@ -32,7 +33,7 @@ const modal = props => {
   const onDelete = () => {
     const { onHide } = props;
 
-    deleteCard({ id: cardId });
+    dispatch(deleteCard({ id: cardId }));
     onHide();
   };
 
@@ -48,7 +49,9 @@ const modal = props => {
         <Modal.Title id="contained-modal-title-vcenter">
           <Caption
             captionName={cardName}
-            changeInputName={text => editCardName({ text: text, id: cardId })}
+            changeInputName={text =>
+              dispatch(editCardName({ text: text, id: cardId }))
+            }
           />
           <p className={classes.SubHeading}>в колонке {colName}</p>
         </Modal.Title>
@@ -56,13 +59,15 @@ const modal = props => {
       <Modal.Body>
         <Description
           cardDesc={cardDesc}
-          onDescSaved={text => editCardDesc({ cardId: cardId, text: text })}
+          onDescSaved={text =>
+            dispatch(editCardDesc({ cardId: cardId, text: text }))
+          }
         />
       </Modal.Body>
       <Modal.Body>
         <CommentCreateForm
           onCommentSaved={text =>
-            addComment({ id: uuidv4(), cardId: cardId, text: text })
+            dispatch(addComment({ id: uuidv4(), cardId: cardId, text: text }))
           }
         />
         {comments.map((comment, index) => {
@@ -72,9 +77,11 @@ const modal = props => {
             <CommentItem
               key={index}
               username={username}
-              onCommentChange={text => editComment({ id: id, text: text })}
+              onCommentChange={text =>
+                dispatch(editComment({ id: id, text: text }))
+              }
               commentText={value}
-              onCommentDelete={() => deleteComment({ id: id })}
+              onCommentDelete={() => dispatch(deleteComment({ id: id }))}
             />
           );
         })}
@@ -93,12 +100,7 @@ modal.propTypes = {
   colName: PropTypes.string.isRequired,
   cardName: PropTypes.string.isRequired,
   cardDesc: PropTypes.string,
-  editCardName: PropTypes.func.isRequired,
-  editCardDesc: PropTypes.func.isRequired,
-  deleteCard: PropTypes.func.isRequired,
-  addComment: PropTypes.func.isRequired,
-  editComment: PropTypes.func.isRequired,
-  deleteComment: PropTypes.func.isRequired,
+  dispatch: PropTypes.func.isRequired,
   cardId: PropTypes.string.isRequired,
   comments: PropTypes.array,
   show: PropTypes.bool.isRequired,
@@ -113,4 +115,4 @@ function mapStateToProps(state, props) {
   };
 }
 
-export default connect(mapStateToProps, actions)(modal);
+export default connect(mapStateToProps)(modal);

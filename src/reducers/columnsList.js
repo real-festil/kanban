@@ -1,5 +1,6 @@
-import { handleActions } from "redux-actions";
-import { editColName } from "../actions";
+import { handleActions, createAction } from "redux-actions";
+
+export const editColName = createAction("EDIT_COL_NAME");
 
 const initialState = [
   { id: 0, name: "ToDo" },
@@ -11,10 +12,10 @@ const initialState = [
 export default handleActions(
   {
     [editColName](state, action) {
+      const { id, text } = action.payload;
+
       return state.map(column =>
-        column.id === action.payload.id
-          ? { ...column, name: action.payload.text }
-          : column
+        column.id === id ? { ...column, name: text } : column
       );
     }
   },

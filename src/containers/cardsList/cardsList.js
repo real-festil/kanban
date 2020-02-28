@@ -1,14 +1,15 @@
 import React from "react";
-import Card from "../../components/cards/card/card";
+import CardItem from "../../components/cards/cardItem/cardItem";
 import AddCard from "../../components/cards/addCard/addCard";
-import * as actions from "../../actions";
+import { addCard } from "../../reducers/cards";
 import { connect } from "react-redux";
 import { v4 as uuidv4 } from "uuid";
-import { getColumnCards } from "../../selectors";
+import { getColumnCards } from "../../selectors/cards";
 import PropTypes from "prop-types";
 
 const cardsList = props => {
-  const { colName, addCard, colId, cards } = props;
+  const { colName, dispatch, colId, cards } = props;
+
   return (
     <>
       {cards.map((card, index) => {
@@ -16,10 +17,10 @@ const cardsList = props => {
 
         return (
           <div key={id}>
-            <Card
+            <CardItem
               index={id}
               cardId={id}
-              comments={cards[index].comments.length}
+              comments={cards[index].commentsLength}
               cardNameValue={name}
               cardName={name}
               colName={colName}
@@ -31,7 +32,7 @@ const cardsList = props => {
       <AddCard
         colName={colName}
         onCardAdded={text =>
-          addCard({ id: uuidv4(), colId: colId, text: text })
+          dispatch(addCard({ id: uuidv4(), colId: colId, text: text }))
         }
       />
     </>
@@ -40,7 +41,7 @@ const cardsList = props => {
 
 cardsList.propTypes = {
   colName: PropTypes.string.isRequired,
-  addCard: PropTypes.func.isRequired,
+  dispatch: PropTypes.func.isRequired,
   colId: PropTypes.number.isRequired,
   cards: PropTypes.array.isRequired
 };
@@ -51,4 +52,4 @@ function mapStateToProps(state, props) {
   };
 }
 
-export default connect(mapStateToProps, actions)(cardsList);
+export default connect(mapStateToProps)(cardsList);

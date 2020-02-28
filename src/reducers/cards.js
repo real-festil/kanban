@@ -1,71 +1,45 @@
-import { handleActions } from "redux-actions";
-import { editCardDesc, addCard, editCardName, deleteCard } from "../actions";
+import { handleActions, createAction } from "redux-actions";
 
 const initialState = [];
+
+export const addCard = createAction("ADD_CARD");
+export const editCardName = createAction("EDIT_CARD_NAME");
+export const deleteCard = createAction("DELETE_CARD");
+export const editCardDesc = createAction("EDIT_CARD_DESC");
 
 export default handleActions(
   {
     [addCard](state, action) {
+      const { id, colId, text } = action.payload;
+
       return [
         ...state,
         {
-          id: action.payload.id,
-          colId: action.payload.colId,
-          name: action.payload.text,
+          id,
+          colId,
+          name: text,
           comments: 0,
           cardDesc: ""
         }
       ];
     },
     [editCardName](state, action) {
+      const { id, text } = action.payload;
+
       return state.map(card =>
-        card.id === action.payload.id
-          ? { ...card, name: action.payload.text }
-          : card
+        card.id === id ? { ...card, name: text } : card
       );
     },
     [deleteCard](state, action) {
       return state.filter(card => card.id !== action.payload.id);
     },
     [editCardDesc](state, action) {
+      const { cardId, text } = action.payload;
+
       return state.map(card =>
-        card.id === action.payload.cardId
-          ? { ...card, cardDesc: action.payload.text }
-          : card
+        card.id === cardId ? { ...card, cardDesc: text } : card
       );
     }
   },
   initialState
 );
-
-// export default function reducer(state = initialState, action) {
-//   const { type, id, colId, text } = action;
-
-//   switch (type) {
-//     case ADD_CARD:
-//       return [
-//         ...state,
-//         {
-//           id: id,
-//           colId: colId,
-//           name: text,
-//           comments: 0,
-//           cardDesc: ""
-//         }
-//       ];
-//     case EDIT_CARD_NAME:
-//       return [
-//         ...state.map(card => (card.id === id ? { ...card, name: text } : card))
-//       ];
-//     case DELETE_CARD:
-//       return [...state.filter(card => card.id !== id)];
-//     case EDIT_CARD_DESC:
-//       return [
-//         ...state.map(card =>
-//           card.id === action.id ? { ...card, cardDesc: text } : card
-//         )
-//       ];
-//     default:
-//       return state;
-//   }
-// }

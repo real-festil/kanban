@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Modal from "../../../containers/cardModal/cardModal";
-import classes from "./card.module.css";
+import classes from "./cardItem.module.css";
 import PropTypes from "prop-types";
 
 class Card extends Component {
